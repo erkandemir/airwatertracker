@@ -1,11 +1,11 @@
 package com.caproject.server;
-import com.caproject.service.loginservice.LoginRequest;
-import com.caproject.service.loginservice.LoginResponse;
-import com.caproject.service.loginservice.LogoutRequest;
-import com.caproject.service.loginservice.LogoutResponse;
-import com.caproject.service.loginservice.UserInfoRequest;
-import com.caproject.service.loginservice.UserInfoResponse;
-import com.caproject.service.loginservice.LoginServiceGrpc.LoginServiceImplBase;
+import com.caproject.protos.LoginRequest;
+import com.caproject.protos.LoginResponse;
+import com.caproject.protos.LogoutRequest;
+import com.caproject.protos.LogoutResponse;
+import com.caproject.protos.UserInfoRequest;
+import com.caproject.protos.UserInfoResponse;
+import com.caproject.protos.LoginServiceGrpc.LoginServiceImplBase;
 
 import io.grpc.stub.StreamObserver;
 public class LoginServiceImpl extends LoginServiceImplBase {

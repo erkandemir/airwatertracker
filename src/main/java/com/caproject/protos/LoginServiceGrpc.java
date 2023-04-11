@@ -1,4 +1,4 @@
-package com.caproject.service.loginservice;
+package com.caproject.protos;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
@@ -30,30 +30,30 @@ public final class LoginServiceGrpc {
   public static final String SERVICE_NAME = "airWaterTrackerService.LoginService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<com.caproject.service.loginservice.LoginRequest,
-      com.caproject.service.loginservice.LoginResponse> getLoginMethod;
+  private static volatile io.grpc.MethodDescriptor<com.caproject.protos.LoginRequest,
+      com.caproject.protos.LoginResponse> getLoginMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "login",
-      requestType = com.caproject.service.loginservice.LoginRequest.class,
-      responseType = com.caproject.service.loginservice.LoginResponse.class,
+      requestType = com.caproject.protos.LoginRequest.class,
+      responseType = com.caproject.protos.LoginResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.caproject.service.loginservice.LoginRequest,
-      com.caproject.service.loginservice.LoginResponse> getLoginMethod() {
-    io.grpc.MethodDescriptor<com.caproject.service.loginservice.LoginRequest, com.caproject.service.loginservice.LoginResponse> getLoginMethod;
+  public static io.grpc.MethodDescriptor<com.caproject.protos.LoginRequest,
+      com.caproject.protos.LoginResponse> getLoginMethod() {
+    io.grpc.MethodDescriptor<com.caproject.protos.LoginRequest, com.caproject.protos.LoginResponse> getLoginMethod;
     if ((getLoginMethod = LoginServiceGrpc.getLoginMethod) == null) {
       synchronized (LoginServiceGrpc.class) {
         if ((getLoginMethod = LoginServiceGrpc.getLoginMethod) == null) {
           LoginServiceGrpc.getLoginMethod = getLoginMethod = 
-              io.grpc.MethodDescriptor.<com.caproject.service.loginservice.LoginRequest, com.caproject.service.loginservice.LoginResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.caproject.protos.LoginRequest, com.caproject.protos.LoginResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "airWaterTrackerService.LoginService", "login"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.caproject.service.loginservice.LoginRequest.getDefaultInstance()))
+                  com.caproject.protos.LoginRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.caproject.service.loginservice.LoginResponse.getDefaultInstance()))
+                  com.caproject.protos.LoginResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new LoginServiceMethodDescriptorSupplier("login"))
                   .build();
           }
@@ -62,30 +62,30 @@ public final class LoginServiceGrpc {
      return getLoginMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.caproject.service.loginservice.LogoutRequest,
-      com.caproject.service.loginservice.LogoutResponse> getLogoutMethod;
+  private static volatile io.grpc.MethodDescriptor<com.caproject.protos.LogoutRequest,
+      com.caproject.protos.LogoutResponse> getLogoutMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "logout",
-      requestType = com.caproject.service.loginservice.LogoutRequest.class,
-      responseType = com.caproject.service.loginservice.LogoutResponse.class,
+      requestType = com.caproject.protos.LogoutRequest.class,
+      responseType = com.caproject.protos.LogoutResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.caproject.service.loginservice.LogoutRequest,
-      com.caproject.service.loginservice.LogoutResponse> getLogoutMethod() {
-    io.grpc.MethodDescriptor<com.caproject.service.loginservice.LogoutRequest, com.caproject.service.loginservice.LogoutResponse> getLogoutMethod;
+  public static io.grpc.MethodDescriptor<com.caproject.protos.LogoutRequest,
+      com.caproject.protos.LogoutResponse> getLogoutMethod() {
+    io.grpc.MethodDescriptor<com.caproject.protos.LogoutRequest, com.caproject.protos.LogoutResponse> getLogoutMethod;
     if ((getLogoutMethod = LoginServiceGrpc.getLogoutMethod) == null) {
       synchronized (LoginServiceGrpc.class) {
         if ((getLogoutMethod = LoginServiceGrpc.getLogoutMethod) == null) {
           LoginServiceGrpc.getLogoutMethod = getLogoutMethod = 
-              io.grpc.MethodDescriptor.<com.caproject.service.loginservice.LogoutRequest, com.caproject.service.loginservice.LogoutResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.caproject.protos.LogoutRequest, com.caproject.protos.LogoutResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "airWaterTrackerService.LoginService", "logout"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.caproject.service.loginservice.LogoutRequest.getDefaultInstance()))
+                  com.caproject.protos.LogoutRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.caproject.service.loginservice.LogoutResponse.getDefaultInstance()))
+                  com.caproject.protos.LogoutResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new LoginServiceMethodDescriptorSupplier("logout"))
                   .build();
           }
@@ -94,30 +94,30 @@ public final class LoginServiceGrpc {
      return getLogoutMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.caproject.service.loginservice.UserInfoRequest,
-      com.caproject.service.loginservice.UserInfoResponse> getGetUserInformationMethod;
+  private static volatile io.grpc.MethodDescriptor<com.caproject.protos.UserInfoRequest,
+      com.caproject.protos.UserInfoResponse> getGetUserInformationMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getUserInformation",
-      requestType = com.caproject.service.loginservice.UserInfoRequest.class,
-      responseType = com.caproject.service.loginservice.UserInfoResponse.class,
+      requestType = com.caproject.protos.UserInfoRequest.class,
+      responseType = com.caproject.protos.UserInfoResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.caproject.service.loginservice.UserInfoRequest,
-      com.caproject.service.loginservice.UserInfoResponse> getGetUserInformationMethod() {
-    io.grpc.MethodDescriptor<com.caproject.service.loginservice.UserInfoRequest, com.caproject.service.loginservice.UserInfoResponse> getGetUserInformationMethod;
+  public static io.grpc.MethodDescriptor<com.caproject.protos.UserInfoRequest,
+      com.caproject.protos.UserInfoResponse> getGetUserInformationMethod() {
+    io.grpc.MethodDescriptor<com.caproject.protos.UserInfoRequest, com.caproject.protos.UserInfoResponse> getGetUserInformationMethod;
     if ((getGetUserInformationMethod = LoginServiceGrpc.getGetUserInformationMethod) == null) {
       synchronized (LoginServiceGrpc.class) {
         if ((getGetUserInformationMethod = LoginServiceGrpc.getGetUserInformationMethod) == null) {
           LoginServiceGrpc.getGetUserInformationMethod = getGetUserInformationMethod = 
-              io.grpc.MethodDescriptor.<com.caproject.service.loginservice.UserInfoRequest, com.caproject.service.loginservice.UserInfoResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.caproject.protos.UserInfoRequest, com.caproject.protos.UserInfoResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "airWaterTrackerService.LoginService", "getUserInformation"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.caproject.service.loginservice.UserInfoRequest.getDefaultInstance()))
+                  com.caproject.protos.UserInfoRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.caproject.service.loginservice.UserInfoResponse.getDefaultInstance()))
+                  com.caproject.protos.UserInfoResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new LoginServiceMethodDescriptorSupplier("getUserInformation"))
                   .build();
           }
@@ -158,22 +158,22 @@ public final class LoginServiceGrpc {
 
     /**
      */
-    public void login(com.caproject.service.loginservice.LoginRequest request,
-        io.grpc.stub.StreamObserver<com.caproject.service.loginservice.LoginResponse> responseObserver) {
+    public void login(com.caproject.protos.LoginRequest request,
+        io.grpc.stub.StreamObserver<com.caproject.protos.LoginResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getLoginMethod(), responseObserver);
     }
 
     /**
      */
-    public void logout(com.caproject.service.loginservice.LogoutRequest request,
-        io.grpc.stub.StreamObserver<com.caproject.service.loginservice.LogoutResponse> responseObserver) {
+    public void logout(com.caproject.protos.LogoutRequest request,
+        io.grpc.stub.StreamObserver<com.caproject.protos.LogoutResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getLogoutMethod(), responseObserver);
     }
 
     /**
      */
-    public void getUserInformation(com.caproject.service.loginservice.UserInfoRequest request,
-        io.grpc.stub.StreamObserver<com.caproject.service.loginservice.UserInfoResponse> responseObserver) {
+    public void getUserInformation(com.caproject.protos.UserInfoRequest request,
+        io.grpc.stub.StreamObserver<com.caproject.protos.UserInfoResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getGetUserInformationMethod(), responseObserver);
     }
 
@@ -183,22 +183,22 @@ public final class LoginServiceGrpc {
             getLoginMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.caproject.service.loginservice.LoginRequest,
-                com.caproject.service.loginservice.LoginResponse>(
+                com.caproject.protos.LoginRequest,
+                com.caproject.protos.LoginResponse>(
                   this, METHODID_LOGIN)))
           .addMethod(
             getLogoutMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.caproject.service.loginservice.LogoutRequest,
-                com.caproject.service.loginservice.LogoutResponse>(
+                com.caproject.protos.LogoutRequest,
+                com.caproject.protos.LogoutResponse>(
                   this, METHODID_LOGOUT)))
           .addMethod(
             getGetUserInformationMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.caproject.service.loginservice.UserInfoRequest,
-                com.caproject.service.loginservice.UserInfoResponse>(
+                com.caproject.protos.UserInfoRequest,
+                com.caproject.protos.UserInfoResponse>(
                   this, METHODID_GET_USER_INFORMATION)))
           .build();
     }
@@ -227,24 +227,24 @@ public final class LoginServiceGrpc {
 
     /**
      */
-    public void login(com.caproject.service.loginservice.LoginRequest request,
-        io.grpc.stub.StreamObserver<com.caproject.service.loginservice.LoginResponse> responseObserver) {
+    public void login(com.caproject.protos.LoginRequest request,
+        io.grpc.stub.StreamObserver<com.caproject.protos.LoginResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getLoginMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void logout(com.caproject.service.loginservice.LogoutRequest request,
-        io.grpc.stub.StreamObserver<com.caproject.service.loginservice.LogoutResponse> responseObserver) {
+    public void logout(com.caproject.protos.LogoutRequest request,
+        io.grpc.stub.StreamObserver<com.caproject.protos.LogoutResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getLogoutMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void getUserInformation(com.caproject.service.loginservice.UserInfoRequest request,
-        io.grpc.stub.StreamObserver<com.caproject.service.loginservice.UserInfoResponse> responseObserver) {
+    public void getUserInformation(com.caproject.protos.UserInfoRequest request,
+        io.grpc.stub.StreamObserver<com.caproject.protos.UserInfoResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getGetUserInformationMethod(), getCallOptions()), request, responseObserver);
     }
@@ -273,21 +273,21 @@ public final class LoginServiceGrpc {
 
     /**
      */
-    public com.caproject.service.loginservice.LoginResponse login(com.caproject.service.loginservice.LoginRequest request) {
+    public com.caproject.protos.LoginResponse login(com.caproject.protos.LoginRequest request) {
       return blockingUnaryCall(
           getChannel(), getLoginMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public com.caproject.service.loginservice.LogoutResponse logout(com.caproject.service.loginservice.LogoutRequest request) {
+    public com.caproject.protos.LogoutResponse logout(com.caproject.protos.LogoutRequest request) {
       return blockingUnaryCall(
           getChannel(), getLogoutMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public com.caproject.service.loginservice.UserInfoResponse getUserInformation(com.caproject.service.loginservice.UserInfoRequest request) {
+    public com.caproject.protos.UserInfoResponse getUserInformation(com.caproject.protos.UserInfoRequest request) {
       return blockingUnaryCall(
           getChannel(), getGetUserInformationMethod(), getCallOptions(), request);
     }
@@ -316,24 +316,24 @@ public final class LoginServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.caproject.service.loginservice.LoginResponse> login(
-        com.caproject.service.loginservice.LoginRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.caproject.protos.LoginResponse> login(
+        com.caproject.protos.LoginRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getLoginMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.caproject.service.loginservice.LogoutResponse> logout(
-        com.caproject.service.loginservice.LogoutRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.caproject.protos.LogoutResponse> logout(
+        com.caproject.protos.LogoutRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getLogoutMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.caproject.service.loginservice.UserInfoResponse> getUserInformation(
-        com.caproject.service.loginservice.UserInfoRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.caproject.protos.UserInfoResponse> getUserInformation(
+        com.caproject.protos.UserInfoRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getGetUserInformationMethod(), getCallOptions()), request);
     }
@@ -361,16 +361,16 @@ public final class LoginServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_LOGIN:
-          serviceImpl.login((com.caproject.service.loginservice.LoginRequest) request,
-              (io.grpc.stub.StreamObserver<com.caproject.service.loginservice.LoginResponse>) responseObserver);
+          serviceImpl.login((com.caproject.protos.LoginRequest) request,
+              (io.grpc.stub.StreamObserver<com.caproject.protos.LoginResponse>) responseObserver);
           break;
         case METHODID_LOGOUT:
-          serviceImpl.logout((com.caproject.service.loginservice.LogoutRequest) request,
-              (io.grpc.stub.StreamObserver<com.caproject.service.loginservice.LogoutResponse>) responseObserver);
+          serviceImpl.logout((com.caproject.protos.LogoutRequest) request,
+              (io.grpc.stub.StreamObserver<com.caproject.protos.LogoutResponse>) responseObserver);
           break;
         case METHODID_GET_USER_INFORMATION:
-          serviceImpl.getUserInformation((com.caproject.service.loginservice.UserInfoRequest) request,
-              (io.grpc.stub.StreamObserver<com.caproject.service.loginservice.UserInfoResponse>) responseObserver);
+          serviceImpl.getUserInformation((com.caproject.protos.UserInfoRequest) request,
+              (io.grpc.stub.StreamObserver<com.caproject.protos.UserInfoResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -394,7 +394,7 @@ public final class LoginServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return com.caproject.service.loginservice.LoginServiceImpl.getDescriptor();
+      return com.caproject.protos.LoginServiceImpl.getDescriptor();
     }
 
     @java.lang.Override

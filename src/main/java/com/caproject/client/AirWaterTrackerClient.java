@@ -2,10 +2,10 @@ package com.caproject.client;
 
 import java.util.concurrent.TimeUnit;
 
-import com.caproject.service.loginservice.LoginServiceGrpc;
-import com.caproject.service.loginservice.LoginServiceGrpc.LoginServiceBlockingStub;
-import com.caproject.service.loginservice.UserInfoRequest;
-import com.caproject.service.loginservice.UserInfoResponse;
+import com.caproject.protos.LoginServiceGrpc;
+import com.caproject.protos.LoginServiceGrpc.LoginServiceBlockingStub;
+import com.caproject.protos.UserInfoRequest;
+import com.caproject.protos.UserInfoResponse;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
