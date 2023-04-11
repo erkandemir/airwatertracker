@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package airWaterTrackerService;
+
+option java_multiple_files = true;
+option java_package = "com.caproject.service.loginservice";
+option java_outer_classname = "LoginServiceImpl";
+
+// Interface exported by the server.
+service LoginService {
+    rpc login(LoginRequest) returns (LoginResponse) {}
+    rpc logout(LogoutRequest) returns (LogoutResponse) {}
+    rpc getUserInformation(UserInfoRequest) returns (UserInfoResponse) {}
+}
+
+// Login
+message LoginRequest {
+  string username = 1;
+  string password = 2;  
+}
+
+message LoginResponse {
+  string ticketId = 1;
+  string username = 2;
+}
+
+// Logout
+message LogoutRequest {
+  string username = 1;  
+}
+
+message LogoutResponse {
+  string message = 1;
+}
+
+// UserInfo
+message UserInfoRequest {
+  string username = 1;  
+}
+
+message UserInfoResponse {
+  string username = 1;
+  string name = 2;
+  string surname = 3;
+}
+
+
