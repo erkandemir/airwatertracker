@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package airWaterTrackerService;
+
+option java_multiple_files = true;
+option java_package = "com.caproject.protos";
+option java_outer_classname = "AirInformationServiceImpl";
+
+// Interface exported by the server.
+service AirInformationService {
+    rpc GetCarbonMonoxideLevel(AirInfoRequest) returns (AirInfoResponse) {}
+    rpc ActivateFilter(ActivateFilterRequest) returns (ActivateFilterResponse) {}
+}
+
+
+message AirInfoRequest {
+  string locationId = 1;
+}
+
+message AirInfoResponse {
+  string zoneName = 1;
+  double carbonMonoxideLevel = 2;
+  string airQualityStatus = 3;
+}
+
+message ActivateFilterRequest {
+  string filterId = 1;
+}
+
+message ActivateFilterResponse {
+  string filterId = 1;
+  bool filterStatus = 2;
+}
+
+
+
+
+

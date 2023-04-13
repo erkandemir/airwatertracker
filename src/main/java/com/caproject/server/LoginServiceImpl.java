@@ -1,6 +1,7 @@
 package com.caproject.server;
 import com.caproject.protos.LoginRequest;
 import com.caproject.protos.LoginResponse;
+import com.caproject.protos.LoginResponse.Builder;
 import com.caproject.protos.LogoutRequest;
 import com.caproject.protos.LogoutResponse;
 import com.caproject.protos.UserInfoRequest;
@@ -12,14 +13,26 @@ public class LoginServiceImpl extends LoginServiceImplBase {
 
 	@Override
 	public void login(LoginRequest request, StreamObserver<LoginResponse> responseObserver) {
-		// TODO Auto-generated method stub
-		super.login(request, responseObserver);
+		Builder loginResponse = LoginResponse.newBuilder();
+		if(request.getUsername() == "erkan" && request.getPassword() == "123") {
+			loginResponse.setTicketId("success");
+			loginResponse.setUsername(loginResponse.getUsername());
+			System.out.println("Server is sending the response login success" );
+		}
+		else {
+			loginResponse.setTicketId("failed");
+		}
+			
+		responseObserver.onNext(loginResponse.build());
+		responseObserver.onCompleted();
+		
 	}
 	
 	@Override
 	public void logout(LogoutRequest request, StreamObserver<LogoutResponse> responseObserver) {
-		// TODO Auto-generated method stub
-		super.logout(request, responseObserver);
+		LogoutResponse logoutResponse = LogoutResponse.newBuilder().setMessage("Logout Success").build();
+		responseObserver.onNext(logoutResponse);
+		responseObserver.onCompleted();
 	}
 	
 	@Override

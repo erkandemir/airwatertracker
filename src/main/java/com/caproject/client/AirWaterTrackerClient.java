@@ -2,6 +2,8 @@ package com.caproject.client;
 
 import java.util.concurrent.TimeUnit;
 
+import com.caproject.protos.LoginRequest;
+import com.caproject.protos.LoginResponse;
 import com.caproject.protos.LoginServiceGrpc;
 import com.caproject.protos.LoginServiceGrpc.LoginServiceBlockingStub;
 import com.caproject.protos.UserInfoRequest;
@@ -12,14 +14,15 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 
 public class AirWaterTrackerClient {
+	static String host = "localhost";
+	static int port = 50051;
+	static ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+	public static LoginServiceBlockingStub blockingstub = LoginServiceGrpc.newBlockingStub(channel);
 	public static void main(String[] args) {
-		String host = "localhost";
-		int port = 50051;
-		ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
-		LoginServiceBlockingStub blockingstub = LoginServiceGrpc.newBlockingStub(channel);
 		//HelloWorldClient client = new HelloWorldClient();
 		
 		try {
+			Login("erkan", "123");
 			System.out.println("--Receiving AirWaterTracker Response from Server--");
 			UserInfoRequest userInfoRequest = UserInfoRequest.newBuilder()
 					.setUsername("erkandemir").build();
@@ -43,6 +46,16 @@ public class AirWaterTrackerClient {
 				e.printStackTrace();
 			}
 	    }
+	}
+	
+	public static boolean Login(String username, String password)
+	{
+		LoginRequest loginRequest = LoginRequest.newBuilder()
+				.setUsername("erkan")
+				.setPassword("123").build();
+		LoginResponse loginResponse = blockingstub.login(loginRequest);
+		System.out.println("Message received from Server - TicketId : " + loginResponse.getTicketId());
+		return true;
 		
 	}
 
