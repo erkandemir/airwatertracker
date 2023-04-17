@@ -11,13 +11,15 @@ import com.caproject.protos.LoginServiceGrpc.LoginServiceImplBase;
 import io.grpc.stub.StreamObserver;
 public class LoginServiceImpl extends LoginServiceImplBase {
 
+	public static final String LOGINUSERNAME = "erkan";
+	public static final String LOGINPASSWORD = "123";
+
 	@Override
 	public void login(LoginRequest request, StreamObserver<LoginResponse> responseObserver) {
 		Builder loginResponse = LoginResponse.newBuilder();
-		if(request.getUsername() == "erkan" && request.getPassword() == "123") {
+		if(request.getUsername().equals(LOGINUSERNAME) && request.getPassword().equals(LOGINPASSWORD)) {
 			loginResponse.setTicketId("success");
 			loginResponse.setUsername(loginResponse.getUsername());
-			System.out.println("Server is sending the response login success" );
 		}
 		else {
 			loginResponse.setTicketId("failed");
@@ -25,7 +27,6 @@ public class LoginServiceImpl extends LoginServiceImplBase {
 			
 		responseObserver.onNext(loginResponse.build());
 		responseObserver.onCompleted();
-		
 	}
 	
 	@Override
