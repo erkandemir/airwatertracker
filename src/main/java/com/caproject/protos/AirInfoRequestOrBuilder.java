@@ -8,12 +8,7 @@ public interface AirInfoRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string locationId = 1;</code>
+   * <code>int32 locationId = 1;</code>
    */
-  java.lang.String getLocationId();
-  /**
-   * <code>string locationId = 1;</code>
-   */
-  com.google.protobuf.ByteString
-      getLocationIdBytes();
+  int getLocationId();
 }

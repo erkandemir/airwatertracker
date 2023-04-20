@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ActivateFilterResponse() {
-    filterId_ = "";
+    filterId_ = 0;
     filterStatus_ = false;
   }
 
@@ -44,10 +44,9 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 8: {
 
-            filterId_ = s;
+            filterId_ = input.readInt32();
             break;
           }
           case 16: {
@@ -88,37 +87,12 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int FILTERID_FIELD_NUMBER = 1;
-  private volatile java.lang.Object filterId_;
+  private int filterId_;
   /**
-   * <code>string filterId = 1;</code>
+   * <code>int32 filterId = 1;</code>
    */
-  public java.lang.String getFilterId() {
-    java.lang.Object ref = filterId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      filterId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string filterId = 1;</code>
-   */
-  public com.google.protobuf.ByteString
-      getFilterIdBytes() {
-    java.lang.Object ref = filterId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      filterId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public int getFilterId() {
+    return filterId_;
   }
 
   public static final int FILTERSTATUS_FIELD_NUMBER = 2;
@@ -144,8 +118,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getFilterIdBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, filterId_);
+    if (filterId_ != 0) {
+      output.writeInt32(1, filterId_);
     }
     if (filterStatus_ != false) {
       output.writeBool(2, filterStatus_);
@@ -159,8 +133,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getFilterIdBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, filterId_);
+    if (filterId_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(1, filterId_);
     }
     if (filterStatus_ != false) {
       size += com.google.protobuf.CodedOutputStream
@@ -182,8 +157,8 @@ private static final long serialVersionUID = 0L;
     com.caproject.protos.ActivateFilterResponse other = (com.caproject.protos.ActivateFilterResponse) obj;
 
     boolean result = true;
-    result = result && getFilterId()
-        .equals(other.getFilterId());
+    result = result && (getFilterId()
+        == other.getFilterId());
     result = result && (getFilterStatus()
         == other.getFilterStatus());
     result = result && unknownFields.equals(other.unknownFields);
@@ -198,7 +173,7 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + FILTERID_FIELD_NUMBER;
-    hash = (53 * hash) + getFilterId().hashCode();
+    hash = (53 * hash) + getFilterId();
     hash = (37 * hash) + FILTERSTATUS_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getFilterStatus());
@@ -335,7 +310,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      filterId_ = "";
+      filterId_ = 0;
 
       filterStatus_ = false;
 
@@ -415,9 +390,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.caproject.protos.ActivateFilterResponse other) {
       if (other == com.caproject.protos.ActivateFilterResponse.getDefaultInstance()) return this;
-      if (!other.getFilterId().isEmpty()) {
-        filterId_ = other.filterId_;
-        onChanged();
+      if (other.getFilterId() != 0) {
+        setFilterId(other.getFilterId());
       }
       if (other.getFilterStatus() != false) {
         setFilterStatus(other.getFilterStatus());
@@ -451,71 +425,28 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object filterId_ = "";
+    private int filterId_ ;
     /**
-     * <code>string filterId = 1;</code>
+     * <code>int32 filterId = 1;</code>
      */
-    public java.lang.String getFilterId() {
-      java.lang.Object ref = filterId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        filterId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    public int getFilterId() {
+      return filterId_;
     }
     /**
-     * <code>string filterId = 1;</code>
+     * <code>int32 filterId = 1;</code>
      */
-    public com.google.protobuf.ByteString
-        getFilterIdBytes() {
-      java.lang.Object ref = filterId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        filterId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string filterId = 1;</code>
-     */
-    public Builder setFilterId(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
+    public Builder setFilterId(int value) {
+      
       filterId_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string filterId = 1;</code>
+     * <code>int32 filterId = 1;</code>
      */
     public Builder clearFilterId() {
       
-      filterId_ = getDefaultInstance().getFilterId();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string filterId = 1;</code>
-     */
-    public Builder setFilterIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      filterId_ = value;
+      filterId_ = 0;
       onChanged();
       return this;
     }

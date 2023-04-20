@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private AirInfoRequest() {
-    locationId_ = "";
+    locationId_ = 0;
   }
 
   @java.lang.Override
@@ -43,10 +43,9 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 8: {
 
-            locationId_ = s;
+            locationId_ = input.readInt32();
             break;
           }
           default: {
@@ -82,37 +81,12 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int LOCATIONID_FIELD_NUMBER = 1;
-  private volatile java.lang.Object locationId_;
+  private int locationId_;
   /**
-   * <code>string locationId = 1;</code>
+   * <code>int32 locationId = 1;</code>
    */
-  public java.lang.String getLocationId() {
-    java.lang.Object ref = locationId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      locationId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string locationId = 1;</code>
-   */
-  public com.google.protobuf.ByteString
-      getLocationIdBytes() {
-    java.lang.Object ref = locationId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      locationId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public int getLocationId() {
+    return locationId_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -129,8 +103,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getLocationIdBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, locationId_);
+    if (locationId_ != 0) {
+      output.writeInt32(1, locationId_);
     }
     unknownFields.writeTo(output);
   }
@@ -141,8 +115,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getLocationIdBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, locationId_);
+    if (locationId_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(1, locationId_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -160,8 +135,8 @@ private static final long serialVersionUID = 0L;
     com.caproject.protos.AirInfoRequest other = (com.caproject.protos.AirInfoRequest) obj;
 
     boolean result = true;
-    result = result && getLocationId()
-        .equals(other.getLocationId());
+    result = result && (getLocationId()
+        == other.getLocationId());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -174,7 +149,7 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + LOCATIONID_FIELD_NUMBER;
-    hash = (53 * hash) + getLocationId().hashCode();
+    hash = (53 * hash) + getLocationId();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -308,7 +283,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      locationId_ = "";
+      locationId_ = 0;
 
       return this;
     }
@@ -385,9 +360,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.caproject.protos.AirInfoRequest other) {
       if (other == com.caproject.protos.AirInfoRequest.getDefaultInstance()) return this;
-      if (!other.getLocationId().isEmpty()) {
-        locationId_ = other.locationId_;
-        onChanged();
+      if (other.getLocationId() != 0) {
+        setLocationId(other.getLocationId());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -418,71 +392,28 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object locationId_ = "";
+    private int locationId_ ;
     /**
-     * <code>string locationId = 1;</code>
+     * <code>int32 locationId = 1;</code>
      */
-    public java.lang.String getLocationId() {
-      java.lang.Object ref = locationId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        locationId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    public int getLocationId() {
+      return locationId_;
     }
     /**
-     * <code>string locationId = 1;</code>
+     * <code>int32 locationId = 1;</code>
      */
-    public com.google.protobuf.ByteString
-        getLocationIdBytes() {
-      java.lang.Object ref = locationId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        locationId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string locationId = 1;</code>
-     */
-    public Builder setLocationId(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
+    public Builder setLocationId(int value) {
+      
       locationId_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string locationId = 1;</code>
+     * <code>int32 locationId = 1;</code>
      */
     public Builder clearLocationId() {
       
-      locationId_ = getDefaultInstance().getLocationId();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string locationId = 1;</code>
-     */
-    public Builder setLocationIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      locationId_ = value;
+      locationId_ = 0;
       onChanged();
       return this;
     }

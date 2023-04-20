@@ -37,7 +37,7 @@ public final class AirInformationServiceGrpc {
       fullMethodName = SERVICE_NAME + '/' + "GetCarbonMonoxideLevel",
       requestType = com.caproject.protos.AirInfoRequest.class,
       responseType = com.caproject.protos.AirInfoResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
   public static io.grpc.MethodDescriptor<com.caproject.protos.AirInfoRequest,
       com.caproject.protos.AirInfoResponse> getGetCarbonMonoxideLevelMethod() {
     io.grpc.MethodDescriptor<com.caproject.protos.AirInfoRequest, com.caproject.protos.AirInfoResponse> getGetCarbonMonoxideLevelMethod;
@@ -46,7 +46,7 @@ public final class AirInformationServiceGrpc {
         if ((getGetCarbonMonoxideLevelMethod = AirInformationServiceGrpc.getGetCarbonMonoxideLevelMethod) == null) {
           AirInformationServiceGrpc.getGetCarbonMonoxideLevelMethod = getGetCarbonMonoxideLevelMethod = 
               io.grpc.MethodDescriptor.<com.caproject.protos.AirInfoRequest, com.caproject.protos.AirInfoResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
               .setFullMethodName(generateFullMethodName(
                   "airWaterTrackerService.AirInformationService", "GetCarbonMonoxideLevel"))
               .setSampledToLocalTracing(true)
@@ -126,9 +126,9 @@ public final class AirInformationServiceGrpc {
 
     /**
      */
-    public void getCarbonMonoxideLevel(com.caproject.protos.AirInfoRequest request,
+    public io.grpc.stub.StreamObserver<com.caproject.protos.AirInfoRequest> getCarbonMonoxideLevel(
         io.grpc.stub.StreamObserver<com.caproject.protos.AirInfoResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetCarbonMonoxideLevelMethod(), responseObserver);
+      return asyncUnimplementedStreamingCall(getGetCarbonMonoxideLevelMethod(), responseObserver);
     }
 
     /**
@@ -142,7 +142,7 @@ public final class AirInformationServiceGrpc {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             getGetCarbonMonoxideLevelMethod(),
-            asyncUnaryCall(
+            asyncBidiStreamingCall(
               new MethodHandlers<
                 com.caproject.protos.AirInfoRequest,
                 com.caproject.protos.AirInfoResponse>(
@@ -181,10 +181,10 @@ public final class AirInformationServiceGrpc {
 
     /**
      */
-    public void getCarbonMonoxideLevel(com.caproject.protos.AirInfoRequest request,
+    public io.grpc.stub.StreamObserver<com.caproject.protos.AirInfoRequest> getCarbonMonoxideLevel(
         io.grpc.stub.StreamObserver<com.caproject.protos.AirInfoResponse> responseObserver) {
-      asyncUnaryCall(
-          getChannel().newCall(getGetCarbonMonoxideLevelMethod(), getCallOptions()), request, responseObserver);
+      return asyncBidiStreamingCall(
+          getChannel().newCall(getGetCarbonMonoxideLevelMethod(), getCallOptions()), responseObserver);
     }
 
     /**
@@ -219,13 +219,6 @@ public final class AirInformationServiceGrpc {
 
     /**
      */
-    public com.caproject.protos.AirInfoResponse getCarbonMonoxideLevel(com.caproject.protos.AirInfoRequest request) {
-      return blockingUnaryCall(
-          getChannel(), getGetCarbonMonoxideLevelMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
     public com.caproject.protos.ActivateFilterResponse activateFilter(com.caproject.protos.ActivateFilterRequest request) {
       return blockingUnaryCall(
           getChannel(), getActivateFilterMethod(), getCallOptions(), request);
@@ -255,14 +248,6 @@ public final class AirInformationServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.caproject.protos.AirInfoResponse> getCarbonMonoxideLevel(
-        com.caproject.protos.AirInfoRequest request) {
-      return futureUnaryCall(
-          getChannel().newCall(getGetCarbonMonoxideLevelMethod(), getCallOptions()), request);
-    }
-
-    /**
-     */
     public com.google.common.util.concurrent.ListenableFuture<com.caproject.protos.ActivateFilterResponse> activateFilter(
         com.caproject.protos.ActivateFilterRequest request) {
       return futureUnaryCall(
@@ -270,8 +255,8 @@ public final class AirInformationServiceGrpc {
     }
   }
 
-  private static final int METHODID_GET_CARBON_MONOXIDE_LEVEL = 0;
-  private static final int METHODID_ACTIVATE_FILTER = 1;
+  private static final int METHODID_ACTIVATE_FILTER = 0;
+  private static final int METHODID_GET_CARBON_MONOXIDE_LEVEL = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -290,10 +275,6 @@ public final class AirInformationServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_GET_CARBON_MONOXIDE_LEVEL:
-          serviceImpl.getCarbonMonoxideLevel((com.caproject.protos.AirInfoRequest) request,
-              (io.grpc.stub.StreamObserver<com.caproject.protos.AirInfoResponse>) responseObserver);
-          break;
         case METHODID_ACTIVATE_FILTER:
           serviceImpl.activateFilter((com.caproject.protos.ActivateFilterRequest) request,
               (io.grpc.stub.StreamObserver<com.caproject.protos.ActivateFilterResponse>) responseObserver);
@@ -308,6 +289,9 @@ public final class AirInformationServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_GET_CARBON_MONOXIDE_LEVEL:
+          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getCarbonMonoxideLevel(
+              (io.grpc.stub.StreamObserver<com.caproject.protos.AirInfoResponse>) responseObserver);
         default:
           throw new AssertionError();
       }

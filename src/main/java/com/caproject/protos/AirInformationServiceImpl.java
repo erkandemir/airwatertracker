@@ -45,20 +45,20 @@ public final class AirInformationServiceImpl {
     java.lang.String[] descriptorData = {
       "\n\033airInformationService.proto\022\026airWaterT" +
       "rackerService\"$\n\016AirInfoRequest\022\022\n\nlocat" +
-      "ionId\030\001 \001(\t\"Z\n\017AirInfoResponse\022\020\n\010zoneNa" +
+      "ionId\030\001 \001(\005\"Z\n\017AirInfoResponse\022\020\n\010zoneNa" +
       "me\030\001 \001(\t\022\033\n\023carbonMonoxideLevel\030\002 \001(\001\022\030\n" +
       "\020airQualityStatus\030\003 \001(\t\")\n\025ActivateFilte" +
-      "rRequest\022\020\n\010filterId\030\001 \001(\t\"@\n\026ActivateFi" +
-      "lterResponse\022\020\n\010filterId\030\001 \001(\t\022\024\n\014filter" +
-      "Status\030\002 \001(\0102\367\001\n\025AirInformationService\022k" +
+      "rRequest\022\020\n\010filterId\030\001 \001(\005\"@\n\026ActivateFi" +
+      "lterResponse\022\020\n\010filterId\030\001 \001(\005\022\024\n\014filter" +
+      "Status\030\002 \001(\0102\373\001\n\025AirInformationService\022o" +
       "\n\026GetCarbonMonoxideLevel\022&.airWaterTrack" +
       "erService.AirInfoRequest\032\'.airWaterTrack" +
-      "erService.AirInfoResponse\"\000\022q\n\016ActivateF" +
-      "ilter\022-.airWaterTrackerService.ActivateF" +
-      "ilterRequest\032..airWaterTrackerService.Ac" +
-      "tivateFilterResponse\"\000B3\n\024com.caproject." +
-      "protosB\031AirInformationServiceImplP\001b\006pro" +
-      "to3"
+      "erService.AirInfoResponse\"\000(\0010\001\022q\n\016Activ" +
+      "ateFilter\022-.airWaterTrackerService.Activ" +
+      "ateFilterRequest\032..airWaterTrackerServic" +
+      "e.ActivateFilterResponse\"\000B3\n\024com.caproj" +
+      "ect.protosB\031AirInformationServiceImplP\001b" +
+      "\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

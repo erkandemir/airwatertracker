@@ -8,12 +8,7 @@ public interface ActivateFilterRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string filterId = 1;</code>
+   * <code>int32 filterId = 1;</code>
    */
-  java.lang.String getFilterId();
-  /**
-   * <code>string filterId = 1;</code>
-   */
-  com.google.protobuf.ByteString
-      getFilterIdBytes();
+  int getFilterId();
 }
