@@ -13,7 +13,8 @@ public class LoginServiceImpl extends LoginServiceImplBase {
 
 	public static final String LOGINUSERNAME = "erkan";
 	public static final String LOGINPASSWORD = "123";
-
+	
+	//This method is a Simple RPC method.
 	@Override
 	public void login(LoginRequest request, StreamObserver<LoginResponse> responseObserver) {
 		Builder loginResponse = LoginResponse.newBuilder();
@@ -29,6 +30,7 @@ public class LoginServiceImpl extends LoginServiceImplBase {
 		responseObserver.onCompleted();
 	}
 	
+	//This method is a Simple RPC method.
 	@Override
 	public void logout(LogoutRequest request, StreamObserver<LogoutResponse> responseObserver) {
 		LogoutResponse logoutResponse = LogoutResponse.newBuilder().setMessage("Logout Success").build();
@@ -36,6 +38,7 @@ public class LoginServiceImpl extends LoginServiceImplBase {
 		responseObserver.onCompleted();
 	}
 	
+	//This method is a Simple RPC method.
 	@Override
 	public void getUserInformation(UserInfoRequest request, StreamObserver<UserInfoResponse> responseObserver) {
 		// TODO Auto-generated method stub

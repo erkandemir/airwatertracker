@@ -10,6 +10,9 @@ import com.caproject.protos.AirInformationServiceGrpc.AirInformationServiceImplB
 import io.grpc.stub.StreamObserver;
 
 public class AirInformationServiceImpl extends AirInformationServiceImplBase {
+	
+	
+	//The method is characterized as a Bidirectional stream method
 	@Override
 	public StreamObserver<AirInfoRequest> getCarbonMonoxideLevel(StreamObserver<AirInfoResponse> responseObserver) {	
 	    return new StreamObserver<AirInfoRequest>() {
@@ -60,16 +63,62 @@ public class AirInformationServiceImpl extends AirInformationServiceImplBase {
 	    };
 	}
 		
-
-	
-	
-
+	//The method is characterized as a Server-Side stream method
 	@Override
-	public void activateFilter(ActivateFilterRequest request, StreamObserver<ActivateFilterResponse> responseObserver) {
-		// TODO Auto-generated method stub
-		super.activateFilter(request, responseObserver);
-	}
-	
-	
+	public void activateFilter(ActivateFilterRequest request, StreamObserver<ActivateFilterResponse> responseObserver){
+    	int locationId = request.getLocationId();
+    	
+    	if(locationId == 1) {
+        	ActivateFilterResponse filterResponse1 = ActivateFilterResponse.newBuilder()
+        			.setFilterId(1)
+        			.setFilterStatus(true).build();
+        	ActivateFilterResponse filterResponse2 = ActivateFilterResponse.newBuilder()
+        			.setFilterId(2)
+        			.setFilterStatus(false).build();
+        	ActivateFilterResponse filterResponse3 = ActivateFilterResponse.newBuilder()
+        			.setFilterId(3)
+        			.setFilterStatus(true).build();
+        	responseObserver.onNext(filterResponse1);
+        	responseObserver.onNext(filterResponse2);
+        	responseObserver.onNext(filterResponse3);
+    	}
+    	else if(locationId == 2)
+    	{
+
+        	ActivateFilterResponse filterResponse4 = ActivateFilterResponse.newBuilder()
+        			.setFilterId(4)
+        			.setFilterStatus(true).build();
+        	ActivateFilterResponse filterResponse5 = ActivateFilterResponse.newBuilder()
+        			.setFilterId(5)
+        			.setFilterStatus(false).build();
+        	ActivateFilterResponse filterResponse6 = ActivateFilterResponse.newBuilder()
+        			.setFilterId(6)
+        			.setFilterStatus(false).build();
+        	responseObserver.onNext(filterResponse4);
+        	responseObserver.onNext(filterResponse5);
+        	responseObserver.onNext(filterResponse6);
+	        	
+    	}
+    	else if(locationId == 3)
+    	{
+
+        	ActivateFilterResponse filterResponse7 = ActivateFilterResponse.newBuilder()
+        			.setFilterId(7)
+        			.setFilterStatus(false).build();
+        	ActivateFilterResponse filterResponse8 = ActivateFilterResponse.newBuilder()
+        			.setFilterId(8)
+        			.setFilterStatus(true).build();
+        	ActivateFilterResponse filterResponse9 = ActivateFilterResponse.newBuilder()
+        			.setFilterId(9)
+        			.setFilterStatus(true).build();
+        	responseObserver.onNext(filterResponse7);
+        	responseObserver.onNext(filterResponse8);
+        	responseObserver.onNext(filterResponse9);
+        	
+	        	
+    	}
+    	responseObserver.onCompleted();
+	    
+    }
 
 }

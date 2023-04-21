@@ -9,7 +9,7 @@ option java_outer_classname = "AirInformationServiceImpl";
 // Interface exported by the server.
 service AirInformationService {
     rpc GetCarbonMonoxideLevel(stream AirInfoRequest) returns (stream AirInfoResponse) {}
-    rpc ActivateFilter(ActivateFilterRequest) returns (ActivateFilterResponse) {}
+    rpc ActivateFilter(ActivateFilterRequest) returns (stream ActivateFilterResponse) {}
 }
 
 
@@ -24,7 +24,7 @@ message AirInfoResponse {
 }
 
 message ActivateFilterRequest {
-  int32 filterId = 1;
+  int32 locationId = 1;
 }
 
 message ActivateFilterResponse {

@@ -47,18 +47,18 @@ public final class AirInformationServiceImpl {
       "rackerService\"$\n\016AirInfoRequest\022\022\n\nlocat" +
       "ionId\030\001 \001(\005\"Z\n\017AirInfoResponse\022\020\n\010zoneNa" +
       "me\030\001 \001(\t\022\033\n\023carbonMonoxideLevel\030\002 \001(\001\022\030\n" +
-      "\020airQualityStatus\030\003 \001(\t\")\n\025ActivateFilte" +
-      "rRequest\022\020\n\010filterId\030\001 \001(\005\"@\n\026ActivateFi" +
-      "lterResponse\022\020\n\010filterId\030\001 \001(\005\022\024\n\014filter" +
-      "Status\030\002 \001(\0102\373\001\n\025AirInformationService\022o" +
-      "\n\026GetCarbonMonoxideLevel\022&.airWaterTrack" +
-      "erService.AirInfoRequest\032\'.airWaterTrack" +
-      "erService.AirInfoResponse\"\000(\0010\001\022q\n\016Activ" +
-      "ateFilter\022-.airWaterTrackerService.Activ" +
-      "ateFilterRequest\032..airWaterTrackerServic" +
-      "e.ActivateFilterResponse\"\000B3\n\024com.caproj" +
-      "ect.protosB\031AirInformationServiceImplP\001b" +
-      "\006proto3"
+      "\020airQualityStatus\030\003 \001(\t\"+\n\025ActivateFilte" +
+      "rRequest\022\022\n\nlocationId\030\001 \001(\005\"@\n\026Activate" +
+      "FilterResponse\022\020\n\010filterId\030\001 \001(\005\022\024\n\014filt" +
+      "erStatus\030\002 \001(\0102\375\001\n\025AirInformationService" +
+      "\022o\n\026GetCarbonMonoxideLevel\022&.airWaterTra" +
+      "ckerService.AirInfoRequest\032\'.airWaterTra" +
+      "ckerService.AirInfoResponse\"\000(\0010\001\022s\n\016Act" +
+      "ivateFilter\022-.airWaterTrackerService.Act" +
+      "ivateFilterRequest\032..airWaterTrackerServ" +
+      "ice.ActivateFilterResponse\"\0000\001B3\n\024com.ca" +
+      "project.protosB\031AirInformationServiceImp" +
+      "lP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -89,7 +89,7 @@ public final class AirInformationServiceImpl {
     internal_static_airWaterTrackerService_ActivateFilterRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_airWaterTrackerService_ActivateFilterRequest_descriptor,
-        new java.lang.String[] { "FilterId", });
+        new java.lang.String[] { "LocationId", });
     internal_static_airWaterTrackerService_ActivateFilterResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_airWaterTrackerService_ActivateFilterResponse_fieldAccessorTable = new

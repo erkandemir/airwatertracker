@@ -19,7 +19,6 @@ public class AirWaterTrackerServer {
 		LoginServiceImpl loginService = new LoginServiceImpl();
 		AirInformationServiceImpl airInformationService = new AirInformationServiceImpl();
 
-
 		try {
 
 			//Get server properties

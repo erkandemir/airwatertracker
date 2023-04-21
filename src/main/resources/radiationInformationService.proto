@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package airWaterTrackerService;
+
+option java_multiple_files = true;
+option java_package = "com.caproject.protos";
+option java_outer_classname = "RadiationInformationServiceImpl";
+
+// Interface exported by the server.
+service RadiationInformationService {
+    rpc GetRadiationLevel(RadiationLevelRequest) returns (stream RadiationLevelResponse) {}
+}
+
+
+message RadiationLevelRequest {
+  int32 locationId = 1;
+}
+
+message RadiationLevelResponse {
+  double radiationLevel = 1;
+  string radioactiveType =2;
+  int32 sensorId =3;
+
+}
+
+
+
+
+

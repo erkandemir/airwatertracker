@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package airWaterTrackerService;
+
+option java_multiple_files = true;
+option java_package = "com.caproject.protos";
+option java_outer_classname = "WaterInformationServiceImpl";
+
+// Interface exported by the server.
+service WaterInformationService {
+    rpc GetWaterInformation(WaterInformationRequest) returns (WaterInformationResponse) {}
+    rpc GetWaterPhValue(stream WaterPhRequest) returns (WaterPhResponse) {}
+}
+
+
+message WaterInformationRequest {
+  int32 locationId = 1;
+  int32 depth =2;
+}
+
+message WaterInformationResponse {
+  double coliLevel = 1;
+  double drinkability =2;
+
+}
+
+message WaterPhRequest {
+  int32 locationId = 1;
+  int32 waterType =2;
+}
+
+message WaterPhResponse {
+  double phValue = 1;
+  double drinkability = 2;
+}
+
+
+
+
+

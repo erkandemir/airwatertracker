@@ -13,10 +13,19 @@ import javax.jmdns.ServiceListener;
 import com.caproject.protos.LoginServiceGrpc.LoginServiceBlockingStub;
 import com.caproject.protos.LogoutRequest;
 import com.caproject.protos.LogoutResponse;
+import com.caproject.protos.RadiationInformationServiceGrpc;
+import com.caproject.protos.RadiationInformationServiceGrpc.RadiationInformationServiceStub;
 import com.caproject.protos.UserInfoRequest;
 import com.caproject.protos.UserInfoResponse;
+import com.caproject.protos.WaterInformationRequest;
+import com.caproject.protos.WaterInformationResponse;
+import com.caproject.protos.WaterInformationServiceGrpc;
+import com.caproject.protos.WaterInformationServiceGrpc.WaterInformationServiceBlockingStub;
+import com.caproject.protos.WaterInformationServiceGrpc.WaterInformationServiceStub;
 import com.caproject.protos.AirInfoRequest;
 import com.caproject.protos.AirInfoResponse;
+import com.caproject.protos.ActivateFilterRequest;
+import com.caproject.protos.ActivateFilterResponse;
 import com.caproject.protos.AirInformationServiceGrpc;
 import com.caproject.protos.AirInformationServiceGrpc.AirInformationServiceStub;
 import com.caproject.protos.LoginRequest;
@@ -33,8 +42,11 @@ import io.grpc.stub.StreamObserver;
 public class AirWaterTrackerClient {
 	
 	public static IRpcCompleteEventListener completeEventListener; 
-	public static LoginServiceBlockingStub blockingstub;
+	public static LoginServiceBlockingStub loginServiceBlockingstub;
 	public static AirInformationServiceStub airInfoServiceStub;
+	public static WaterInformationServiceStub waterInfoServiceStub;
+	public static WaterInformationServiceBlockingStub waterInfoServiceBlockingStub;
+	public static RadiationInformationServiceStub radiationInfoServiceStub;
 	private static String host;
 	private static int port;
 	
@@ -50,7 +62,7 @@ public class AirWaterTrackerClient {
 				.usePlaintext()
 				.build();
 		
-		blockingstub = LoginServiceGrpc.newBlockingStub(channel);
+		loginServiceBlockingstub = LoginServiceGrpc.newBlockingStub(channel);
 		airInfoServiceStub = AirInformationServiceGrpc.newStub(channel);
 		if(airInfoServiceStub == null)
 			System.out.println("stub is null");
@@ -94,8 +106,11 @@ public class AirWaterTrackerClient {
 				.usePlaintext()
 				.build();
 		
-		blockingstub = LoginServiceGrpc.newBlockingStub(channel);
+		loginServiceBlockingstub = LoginServiceGrpc.newBlockingStub(channel);
 		airInfoServiceStub = AirInformationServiceGrpc.newStub(channel);
+		waterInfoServiceStub = WaterInformationServiceGrpc.newStub(channel);
+		waterInfoServiceBlockingStub = WaterInformationServiceGrpc.newBlockingStub(channel);
+		radiationInfoServiceStub = RadiationInformationServiceGrpc.newStub(channel);
 	}
 	
 	public static void connectWithoutDiscoverToServer()
@@ -105,8 +120,11 @@ public class AirWaterTrackerClient {
 				.usePlaintext()
 				.build();
 		
-		blockingstub = LoginServiceGrpc.newBlockingStub(channel);
+		loginServiceBlockingstub = LoginServiceGrpc.newBlockingStub(channel);
 		airInfoServiceStub = AirInformationServiceGrpc.newStub(channel);
+		waterInfoServiceStub = WaterInformationServiceGrpc.newStub(channel);
+		waterInfoServiceBlockingStub = WaterInformationServiceGrpc.newBlockingStub(channel);
+		radiationInfoServiceStub = RadiationInformationServiceGrpc.newStub(channel);
 	}
 	
 
@@ -178,7 +196,7 @@ public class AirWaterTrackerClient {
 		LoginRequest loginRequest = LoginRequest.newBuilder()
 				.setUsername(username)
 				.setPassword(password).build();
-		LoginResponse loginResponse = blockingstub.login(loginRequest);
+		LoginResponse loginResponse = loginServiceBlockingstub.login(loginRequest);
 		return loginResponse.getTicketId();
 		
 	}
@@ -186,8 +204,8 @@ public class AirWaterTrackerClient {
 	public static void Logout(String username)
 	{
 		LogoutRequest logoutRequest = LogoutRequest.newBuilder()
-				.setUsername("erkan").build();
-		LogoutResponse logoutResponse = blockingstub.logout(logoutRequest);
+				.setUsername(username).build();
+		LogoutResponse logoutResponse = loginServiceBlockingstub.logout(logoutRequest);
 		System.out.println("Message received from Server : " + logoutResponse.getMessage());
 		
 	}
@@ -196,7 +214,7 @@ public class AirWaterTrackerClient {
 	{
 		UserInfoRequest userInfoRequest = UserInfoRequest.newBuilder()
 				.setUsername("erkandemir").build();	
-		UserInfoResponse userInforResponse = blockingstub.getUserInformation(userInfoRequest);
+		UserInfoResponse userInforResponse = loginServiceBlockingstub.getUserInformation(userInfoRequest);
 		
 		System.out.println("Message received from Server: " + userInforResponse.getName());
 		System.out.println("Message received from Server: " + userInforResponse.getSurname());
@@ -229,13 +247,10 @@ public class AirWaterTrackerClient {
 			}
 		};
 		
-		if(airInfoServiceStub == null)
-			System.out.println("stub is null 2");
 		StreamObserver<AirInfoRequest> requestStreamObserver = airInfoServiceStub.getCarbonMonoxideLevel(responseStreamObserver);
 		
 	    try {
 	        for (int locationId : locationIds) {
-	            System.out.println("LocationId: " + locationId);
 	            AirInfoRequest airInfoRequest = AirInfoRequest.newBuilder()
 	    				.setLocationId(locationId).build();	
 	            requestStreamObserver.onNext(airInfoRequest);
@@ -247,6 +262,54 @@ public class AirWaterTrackerClient {
 	    }
 	    requestStreamObserver.onCompleted();
 		
+		
+	}
+	
+	public static void ActivateFilter(int locationId, IRpcCompleteEventListener listener)
+	{
+		System.out.println("Activate Filter Start");
+		StreamObserver<ActivateFilterResponse> responseStreamObserver = new StreamObserver<ActivateFilterResponse>() {
+			String infoResponse = "";	
+			@Override
+			public void onNext(ActivateFilterResponse value) {
+				System.out.println(value.getFilterId() );
+				infoResponse += "Filter Id: " + value.getFilterId() + "\n";
+				infoResponse += "Filter Status: " + (value.getFilterStatus() ? "Working" : "Stopped") + "\n";
+				infoResponse += "----------\n";
+			}
+			
+			@Override
+			public void onError(Throwable t) {
+				System.out.println(t.getMessage());
+				listener.isError();	
+			}
+			
+			@Override
+			public void onCompleted() {
+				System.out.println("complete");
+				listener.isRpcComplate(infoResponse);
+			}
+		};
+		
+		ActivateFilterRequest activateFilterRequest = ActivateFilterRequest.newBuilder()
+				.setLocationId(locationId).build();
+		
+		airInfoServiceStub.activateFilter(activateFilterRequest, responseStreamObserver); 
+	}
+	
+	
+	//Water Information Client Methods
+	public static String GetWaterInformation(int locationId, int depth)
+	{
+		WaterInformationRequest waterInfoRequest = WaterInformationRequest.newBuilder()
+				.setLocationId(locationId)
+				.setDepth(depth).build();
+		WaterInformationResponse waterInfoResponse = waterInfoServiceBlockingStub.getWaterInformation(waterInfoRequest);
+		
+		String responseMessage = "";
+		responseMessage += "Coli Level: " + waterInfoResponse.getColiLevel() + "\n";
+		responseMessage += "Drinkability: " + waterInfoResponse.getDrinkability();
+		return responseMessage;
 		
 	}
 
