@@ -4,6 +4,7 @@
 
 
 > DomainDescription
+
 The project is a software application designed for monitoring water and air pollution, developed using a server-client architecture. 
 A service has been implemented to provide users with information about the pollution levels using scientific metrics derived from sensors installed in different locations.
 The service retrieves data from a database and presents it to clients. Municipalities, government officials, and city planners can use this service for their projects and to inform the public.
