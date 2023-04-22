@@ -79,7 +79,7 @@ public class LoginFrame extends JFrame {
         statusLabel.setText("");
         usernameField.setText("");
         passwordField.setText("");
-        setVisible(false);
+        setVisible(true);
     }
     
     public void setEventListener(IloginButonEventListener listener)

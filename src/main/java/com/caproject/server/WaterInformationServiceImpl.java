@@ -62,7 +62,7 @@ public class WaterInformationServiceImpl extends WaterInformationServiceImplBase
 	    		}
 	    		
 	    		WaterPhInfo phInfo = WaterPhInfo.newBuilder()
-	    				.setWaterSupply("Lake" + locationId)
+	    				.setWaterSupply(locationName + locationId)
 	    				.setPhValue(phValue)
 	    				.setDrinkability(drinkablity).build();
 	    		

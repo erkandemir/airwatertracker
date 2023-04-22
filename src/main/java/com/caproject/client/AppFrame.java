@@ -21,7 +21,9 @@ public class AppFrame extends JFrame{
 
         //Air Information Service Row ----------------------------------
         JPanel rowAirInformation = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        rowAirInformation.setLayout(new BoxLayout(rowAirInformation, BoxLayout.Y_AXIS));
         rowAirInformation.add(new JLabel("Air Information Service"));
+        
         JPanel airInformationPanel = new JPanel();
         airInformationPanel.setLayout(new BoxLayout(airInformationPanel, BoxLayout.X_AXIS));
         
@@ -148,6 +150,7 @@ public class AppFrame extends JFrame{
         // Water Information Service Row -----------------------------
         
         JPanel rowWaterInformation = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        rowWaterInformation.setLayout(new BoxLayout(rowWaterInformation, BoxLayout.Y_AXIS));
         rowWaterInformation.add(new JLabel("Water Information Service"));
         
         JPanel waterInformationPanel = new JPanel();
@@ -161,36 +164,45 @@ public class AppFrame extends JFrame{
         waterInformationLeftPanel.setLayout(new BoxLayout(waterInformationLeftPanel, BoxLayout.Y_AXIS));
 
         // Location Panel
-        JPanel waterPanelLocation = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel waterPanelLocation = new JPanel(new FlowLayout(FlowLayout.LEFT));
         waterPanelLocation.setLayout(new BoxLayout(waterPanelLocation, BoxLayout.X_AXIS));
-     
-        JRadioButton loc1 = new JRadioButton("South");
-        JRadioButton loc2 = new JRadioButton("North");
-        JRadioButton loc3 = new JRadioButton("West");
-        JRadioButton loc4 = new JRadioButton("East");
         
+        String[] lItems = {"Wiclow Lake", "Cork Lake", "Dublin River", "Limerick River"};
+        JComboBox<String> waterLocations = new JComboBox<>(lItems);
+        waterLocations.setSelectedIndex(0);
         waterPanelLocation.add(new JLabel("Locations: "));
-        waterPanelLocation.add(loc1);
-        waterPanelLocation.add(loc2);
-        waterPanelLocation.add(loc3);
-        waterPanelLocation.add(loc4);
+        waterPanelLocation.add(waterLocations);
+        
         
         waterInformationLeftPanel.add(waterPanelLocation);
         JButton btnGetWaterInformation = new JButton("Show Water Information");
         
         
         //Depth Panel
-        JPanel waterPanelDepth = new JPanel(new FlowLayout());
-        
+        JPanel waterPanelDepth = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JTextField depthTextInput = new JTextField(15);
-        
         
         waterPanelDepth.add(new JLabel("Depth Value: "));
         waterPanelDepth.add(depthTextInput);
         waterInformationLeftPanel.add(waterPanelDepth);
-        waterInformationLeftPanel.add(btnGetWaterInformation);
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        btnPanel.add(btnGetWaterInformation);
+        waterInformationLeftPanel.add(btnPanel);
         
-        JPanel waterPanelWaterTypePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel waterPanelLocation2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        waterPanelLocation2.setLayout(new BoxLayout(waterPanelLocation2, BoxLayout.X_AXIS));
+        JRadioButton waterLoc1 = new JRadioButton("South");
+        JRadioButton waterLoc2 = new JRadioButton("North");
+        JRadioButton waterLoc3 = new JRadioButton("East");
+        JRadioButton waterLoc4 = new JRadioButton("West");
+        
+        waterPanelLocation2.add(new JLabel("Locations: "));
+        waterPanelLocation2.add(waterLoc1);
+        waterPanelLocation2.add(waterLoc2);
+        waterPanelLocation2.add(waterLoc3);
+        waterPanelLocation2.add(waterLoc4);
+        waterInformationLeftPanel.add(waterPanelLocation2);
+        JPanel waterPanelWaterTypePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         waterInformationLeftPanel.add(waterPanelWaterTypePanel);
         String[] items = {"Fresh Water", "Salt Water"};
         JComboBox<String> waterTypeCombo = new JComboBox<>(items);
@@ -221,25 +233,11 @@ public class AppFrame extends JFrame{
         
         btnGetWaterInformation.addActionListener(new ActionListener(){  
         	public void actionPerformed(ActionEvent e){
+        		int locationId = waterLocations.getSelectedIndex() + 1;
                 ArrayList<Integer> locationList = new ArrayList<Integer>();
-        		
-    			if(loc1.isSelected()) {
-    				locationList.add(1);
-    			}
-    			if(loc2.isSelected()) {
-    				locationList.add(2);
-    			}
-    			if(loc3.isSelected()) { 
-    				locationList.add(3);
-    			}		
-    			if(loc4.isSelected()) { 
-    				locationList.add(4);
-    			}		
-    	         
-    			
     			
 				if(!depthTextInput.getText().equals("")) {
-				 String responseText =	AirWaterTrackerClient.GetWaterInformation(locationList.get(locationList.size()-1),
+				 String responseText =	AirWaterTrackerClient.GetWaterInformation(locationId,
 																Integer.parseInt(depthTextInput.getText()));
 				 waterTextArea.setText(responseText); 
 				}
@@ -253,16 +251,16 @@ public class AppFrame extends JFrame{
                 ArrayList<Integer> locationList = new ArrayList<Integer>();
                 int waterType = 1;
         		
-    			if(loc1.isSelected()) {
+    			if(waterLoc1.isSelected()) {
     				locationList.add(1);
     			}
-    			if(loc2.isSelected()) {
+    			if(waterLoc2.isSelected()) {
     				locationList.add(2);
     			}
-    			if(loc3.isSelected()) { 
+    			if(waterLoc3.isSelected()) { 
     				locationList.add(3);
     			}		
-    			if(loc4.isSelected()) { 
+    			if(waterLoc4.isSelected()) { 
     				locationList.add(4);
     			}			
     	         
@@ -301,6 +299,7 @@ public class AppFrame extends JFrame{
         
         
         JPanel rowRadiationInformation = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        rowRadiationInformation.setLayout(new BoxLayout(rowRadiationInformation, BoxLayout.Y_AXIS));
         rowRadiationInformation.add(new JLabel("Radiation Information Service"));
         
         JPanel radiationInformationPanel = new JPanel();
@@ -386,7 +385,7 @@ public class AppFrame extends JFrame{
 
         
         // Set the frame to be visible
-        setVisible(true);
+        setVisible(false);
 	} 
 	
 

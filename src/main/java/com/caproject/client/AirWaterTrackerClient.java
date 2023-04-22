@@ -277,7 +277,7 @@ public class AirWaterTrackerClient {
 	}
 	
 	
-	//GetWaterPhValue - (Server-Side Stream)
+	//GetWaterPhValue - (Client-Side Stream)
 	public static void GetWaterPhValue(ArrayList<Integer> locationList, int waterType, IRpcCompleteEventListener listener) throws InterruptedException
 	{
 		StreamObserver<WaterPhResponse> responseObserver = new StreamObserver<WaterPhResponse>() {
@@ -315,7 +315,6 @@ public class AirWaterTrackerClient {
 		    				.setWaterType(waterType)
 		    				.build();	
 		            requestStreamObserver.onNext(waterPhRequest);
-		            Thread.sleep(1000);
 		        }
 		    } catch (RuntimeException e) {
 		    	//responseStreamObserver.onError(e);
