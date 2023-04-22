@@ -19,18 +19,18 @@ public class RadiationInformationServiceImpl extends RadiationInformationService
     			.setRadioactiveType("alpha")
     			.build();
 		RadiationLevelResponse sensor2Response = RadiationLevelResponse.newBuilder()
-				.setSensorId(locationId * 2)
-    			.setRadiationLevel(locationId * 0.04)
+				.setSensorId(locationId * 3)
+    			.setRadiationLevel(locationId * 0.14)
     			.setRadioactiveType("beta")
     			.build();
 		RadiationLevelResponse sensor3Response = RadiationLevelResponse.newBuilder()
-				.setSensorId(locationId * 2)
-    			.setRadiationLevel(locationId * 0.04)
+				.setSensorId(locationId * 5)
+    			.setRadiationLevel(locationId * 0.5)
     			.setRadioactiveType("neutrons")
     			.build();
 		RadiationLevelResponse sensor4Response = RadiationLevelResponse.newBuilder()
-				.setSensorId(locationId * 2)
-    			.setRadiationLevel(locationId * 0.04)
+				.setSensorId(locationId * 7)
+    			.setRadiationLevel(locationId * 0.9)
     			.setRadioactiveType("gamma")
     			.build();
     	responseObserver.onNext(sensor1Response);

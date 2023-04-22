@@ -22,8 +22,8 @@ public class WaterInformationServiceImpl extends WaterInformationServiceImplBase
 		double constColi = 0.3;
 		double coliLevel= 0;
 		double drinkablity = 0;
-		coliLevel = constColi * depth * locationId;
-		drinkablity = coliLevel / locationId;
+		coliLevel = (constColi  * locationId) / depth;
+		drinkablity = 1 / coliLevel ;
 		
 	
 		WaterInformationResponse waterInformationResponse = WaterInformationResponse.newBuilder()
@@ -49,14 +49,16 @@ public class WaterInformationServiceImpl extends WaterInformationServiceImplBase
 	    		int waterType = request.getWaterType();
 	    		double phValue = 0;
 	    		double drinkablity = 0;
+	    		String locationName = "Lake"; 
 	    		
-	    		if(waterType == 2) {
+	    		if(waterType == 1) {
 	    			phValue = locationId * waterType;
 	    			drinkablity = phValue * locationId;
 	    		}
 	    		else {
 	    			drinkablity = 0;
 	    			phValue = locationId * waterType * 2;
+	    			locationName = "Sea";
 	    		}
 	    		
 	    		WaterPhInfo phInfo = WaterPhInfo.newBuilder()

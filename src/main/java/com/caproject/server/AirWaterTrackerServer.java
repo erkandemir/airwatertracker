@@ -18,6 +18,8 @@ public class AirWaterTrackerServer {
 	public static void main(String[] args) throws IOException {
 		LoginServiceImpl loginService = new LoginServiceImpl();
 		AirInformationServiceImpl airInformationService = new AirInformationServiceImpl();
+		WaterInformationServiceImpl waterInformationService = new WaterInformationServiceImpl();
+		RadiationInformationServiceImpl radiationInformationService = new RadiationInformationServiceImpl();
 
 		try {
 
@@ -32,6 +34,8 @@ public class AirWaterTrackerServer {
 			Server server = ServerBuilder.forPort(port)
 					.addService(loginService)
 					.addService(airInformationService)
+					.addService(waterInformationService)
+					.addService(radiationInformationService)
 					.build()
 					.start();
 

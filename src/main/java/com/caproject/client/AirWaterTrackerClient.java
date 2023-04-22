@@ -3,7 +3,6 @@ package com.caproject.client;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
@@ -15,6 +14,8 @@ import com.caproject.protos.LogoutRequest;
 import com.caproject.protos.LogoutResponse;
 import com.caproject.protos.RadiationInformationServiceGrpc;
 import com.caproject.protos.RadiationInformationServiceGrpc.RadiationInformationServiceStub;
+import com.caproject.protos.RadiationLevelRequest;
+import com.caproject.protos.RadiationLevelResponse;
 import com.caproject.protos.UserInfoRequest;
 import com.caproject.protos.UserInfoResponse;
 import com.caproject.protos.WaterInformationRequest;
@@ -37,7 +38,6 @@ import com.caproject.protos.LoginServiceGrpc;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 
 
@@ -53,52 +53,7 @@ public class AirWaterTrackerClient {
 	private static String host;
 	private static int port;
 	
-	//Main 
-	public static void main(String[] args) throws InterruptedException {
 
-		String airWaterTracker_service_type = "_airwater._tcp.local.";
-		
-		//discoverServer(airWaterTracker_service_type);
-		
-		ManagedChannel channel = ManagedChannelBuilder
-				.forAddress("localhost", 50051)
-				.usePlaintext()
-				.build();
-		
-		loginServiceBlockingstub = LoginServiceGrpc.newBlockingStub(channel);
-		airInfoServiceStub = AirInformationServiceGrpc.newStub(channel);
-		if(airInfoServiceStub == null)
-			System.out.println("stub is null");
-		
-		try {
-			if(Login("erkan", "123").equals("success"))
-			{
-				System.out.println("Login Success");
-				ShowAuthenticatedUserInfo();
-				//GetCarbonMonoxideLevel(new int[] {1, 2,3 });
-				
-			
-				
-			}
-			else {
-				System.out.println("Login Failed");
-			}
-
-		} catch (StatusRuntimeException e) {
-			System.out.println(e.getStatus());
-		    return;		
-		    
-	    } finally {
-	    	//shutdown channel
-	    	try {
-				channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    }
-	}
-	
 	
 	//Discover and connect server
 	public static void connectToServer()
@@ -131,7 +86,8 @@ public class AirWaterTrackerClient {
 	}
 	
 
-	private static void discoverServer(String service_type) {
+	private static void discoverServer(String service_type) 
+	{
 		
 		try {
 			// Create a JmDNS instance
@@ -270,6 +226,7 @@ public class AirWaterTrackerClient {
 		
 	}
 	
+	//ActivateFilter - (Server-Side Stream)
 	public static void ActivateFilter(int locationId, IRpcCompleteEventListener listener)
 	{
 		System.out.println("Activate Filter Start");
@@ -319,6 +276,8 @@ public class AirWaterTrackerClient {
 		return responseMessage;
 	}
 	
+	
+	//GetWaterPhValue - (Server-Side Stream)
 	public static void GetWaterPhValue(ArrayList<Integer> locationList, int waterType, IRpcCompleteEventListener listener) throws InterruptedException
 	{
 		StreamObserver<WaterPhResponse> responseObserver = new StreamObserver<WaterPhResponse>() {
@@ -329,8 +288,8 @@ public class AirWaterTrackerClient {
 	        	{
 	        		responseStr += "Water Supply: " + phInfo.getWaterSupply() + "\n";
 	        		responseStr += "Ph Level: " + phInfo.getPhValue() + "\n";
-	        		responseStr += "Water Supply: " + phInfo.getDrinkability() + "\n";
-	        		responseStr += "---------------";
+	        		responseStr += "Drinkablity: " + phInfo.getDrinkability() + "\n";
+	        		responseStr += "---------------\n";
 	        	}
 	        }
 
@@ -363,6 +322,40 @@ public class AirWaterTrackerClient {
 		        throw e;
 		    }
 		    requestStreamObserver.onCompleted();
+	}
+	
+	
+	// ------------- Radiation Information Service Client Methods ----------
+	
+	//GetRadiationLevel - (Server-Side Stream)
+	public static void GetRadiationLevel(int locationId, IRpcCompleteEventListener listener)
+	{
+		StreamObserver<RadiationLevelResponse> responseStreamObserver = new StreamObserver<RadiationLevelResponse>() {
+			String infoResponse = "";	
+			@Override
+			public void onNext(RadiationLevelResponse value) {
+				infoResponse += "Sensor No: " + value.getSensorId() + "\n";
+				infoResponse += "Radioactive Type: " + value.getRadioactiveType() + "\n";
+				infoResponse += "Radiation Level Status: " + value.getRadiationLevel() + "\n";
+				infoResponse += "----------\n";
+			}
+			
+			@Override
+			public void onError(Throwable t) {
+				
+			}
+			
+			@Override
+			public void onCompleted() {
+				listener.isRpcComplate(infoResponse);
+			}
+		};
+		
+		RadiationLevelRequest radiationLevelRequest = RadiationLevelRequest.newBuilder()
+				.setLocationId(locationId).build();
+		
+		
+		radiationInfoServiceStub.getRadiationLevel(radiationLevelRequest, responseStreamObserver);
 	}
 	
 

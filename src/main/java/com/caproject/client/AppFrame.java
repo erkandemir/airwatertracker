@@ -176,6 +176,8 @@ public class AppFrame extends JFrame{
         waterPanelLocation.add(loc4);
         
         waterInformationLeftPanel.add(waterPanelLocation);
+        JButton btnGetWaterInformation = new JButton("Show Water Information");
+        
         
         //Depth Panel
         JPanel waterPanelDepth = new JPanel(new FlowLayout());
@@ -186,21 +188,21 @@ public class AppFrame extends JFrame{
         waterPanelDepth.add(new JLabel("Depth Value: "));
         waterPanelDepth.add(depthTextInput);
         waterInformationLeftPanel.add(waterPanelDepth);
+        waterInformationLeftPanel.add(btnGetWaterInformation);
         
         JPanel waterPanelWaterTypePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JRadioButton type1 = new JRadioButton("Fresh Water");
-        JRadioButton type2 = new JRadioButton("Salt Water");
-        
         waterInformationLeftPanel.add(waterPanelWaterTypePanel);
+        String[] items = {"Fresh Water", "Salt Water"};
+        JComboBox<String> waterTypeCombo = new JComboBox<>(items);
+        waterTypeCombo.setSelectedIndex(0);
+        
         waterPanelWaterTypePanel.add(new JLabel("Water Type: "));
-        waterPanelWaterTypePanel.add(type1);
-        waterPanelWaterTypePanel.add(type2);
+        waterPanelWaterTypePanel.add(waterTypeCombo);
+        
         
         //Function Panel
         JPanel 	waterInformationFunctionPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JButton btnGetWaterInformation = new JButton("Show Water Information");
         JButton btnGetWaterPhValue = new JButton("Show Water Ph Filter");
-        waterInformationFunctionPanel.add(btnGetWaterInformation);
         waterInformationFunctionPanel.add(btnGetWaterPhValue);
         waterInformationLeftPanel.add(waterInformationFunctionPanel);
         
@@ -221,21 +223,57 @@ public class AppFrame extends JFrame{
         	public void actionPerformed(ActionEvent e){
                 ArrayList<Integer> locationList = new ArrayList<Integer>();
         		
-    			if(location1.isSelected()) {
+    			if(loc1.isSelected()) {
     				locationList.add(1);
     			}
-    			if(location2.isSelected()) {
+    			if(loc2.isSelected()) {
     				locationList.add(2);
     			}
-    			if(location3.isSelected()) { 
+    			if(loc3.isSelected()) { 
     				locationList.add(3);
     			}		
+    			if(loc4.isSelected()) { 
+    				locationList.add(4);
+    			}		
     	         
+    			
+    			
+				if(!depthTextInput.getText().equals("")) {
+				 String responseText =	AirWaterTrackerClient.GetWaterInformation(locationList.get(locationList.size()-1),
+																Integer.parseInt(depthTextInput.getText()));
+				 waterTextArea.setText(responseText); 
+				}
+				
+    	     
+    		}
+    	}); 
+        
+        btnGetWaterPhValue.addActionListener(new ActionListener(){  
+        	public void actionPerformed(ActionEvent e){
+                ArrayList<Integer> locationList = new ArrayList<Integer>();
+                int waterType = 1;
+        		
+    			if(loc1.isSelected()) {
+    				locationList.add(1);
+    			}
+    			if(loc2.isSelected()) {
+    				locationList.add(2);
+    			}
+    			if(loc3.isSelected()) { 
+    				locationList.add(3);
+    			}		
+    			if(loc4.isSelected()) { 
+    				locationList.add(4);
+    			}			
+    	         
+    			//water type selection 
+    			waterType = waterTypeCombo.getSelectedIndex() + 1;
+    				
     			IRpcCompleteEventListener listener = new IRpcCompleteEventListener() {
 					
 					@Override
 					public void isRpcComplate(String message) {
-						textArea.setText(message);
+						waterTextArea.setText(message);
 						
 					}
 					
@@ -248,15 +286,14 @@ public class AppFrame extends JFrame{
 				};
     			 
     			try {
-					AirWaterTrackerClient.GetCarbonMonoxideLevel(locationList, listener);
+					AirWaterTrackerClient.GetWaterPhValue(locationList, waterType, listener);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
     	     
     		}
-    	}); 
-        
+    	});  
         
         
         
@@ -278,17 +315,15 @@ public class AppFrame extends JFrame{
         
 
         // Location Panel
+        
+        
         JPanel radiationPanelLocation = new JPanel(new FlowLayout(FlowLayout.CENTER));
         radiationPanelLocation.setLayout(new BoxLayout(radiationPanelLocation, BoxLayout.X_AXIS));
-     
-        JRadioButton loca1 = new JRadioButton("Air");
-        JRadioButton loca2 = new JRadioButton("Water");
-        JRadioButton loca3 = new JRadioButton("Grand");
-        
+        String[] typeItems = {"Air", "Water", "Ground"};
+        JComboBox<String> locationCombo = new JComboBox<>(typeItems);
+        locationCombo.setSelectedIndex(0);
         radiationPanelLocation.add(new JLabel("Locations :"));
-        radiationPanelLocation.add(loca1);
-        radiationPanelLocation.add(loca2);
-        radiationPanelLocation.add(loca3);
+        radiationPanelLocation.add(locationCombo);
         
         radiationInformationLeftPanel.add(radiationPanelLocation);
         
@@ -314,17 +349,8 @@ public class AppFrame extends JFrame{
         btnGetRadiationInformation.addActionListener(new ActionListener(){  
         	public void actionPerformed(ActionEvent e){
         		int locationId = 0;
-         		
-    			if(loca1.isSelected()) {
-    				locationId = 1;
-    			}
-    			if(loca2.isSelected()) {
-    				locationId = 2;
-    			}
-    			if(loca3.isSelected()) { 
-    				locationId = 3;
-    			}		
-    	         
+         		locationId = locationCombo.getSelectedIndex() + 1;
+         		System.out.println(locationId);
     			IRpcCompleteEventListener listener = new IRpcCompleteEventListener() {
 					
 					@Override
@@ -335,14 +361,12 @@ public class AppFrame extends JFrame{
 					
 					@Override
 					public void isError() {
-						System.out.println("An error occured");
-						// TODO Auto-generated method stub
-						
+						System.out.println("An error occured");		
 					}
 				};
-    			 
-    			//AirWaterTrackerClient
-    	     
+				
+				AirWaterTrackerClient.GetRadiationLevel(locationId, listener);
+				
     		}
     	}); 
         
@@ -354,8 +378,8 @@ public class AppFrame extends JFrame{
         mainPanel.add(rowRadiationInformation);
         
         
-        rowAirInformation.setBackground(Color.ORANGE);
-        rowWaterInformation.setBackground(Color.BLUE);
+        rowAirInformation.setBackground(Color.LIGHT_GRAY);
+        rowWaterInformation.setBackground(Color.LIGHT_GRAY);
         rowRadiationInformation.setBackground(Color.LIGHT_GRAY);
         
         add(mainPanel);
