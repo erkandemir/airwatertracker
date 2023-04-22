@@ -52,7 +52,7 @@ public class AirInformationServiceImpl extends AirInformationServiceImplBase {
 
 			@Override
 			public void onError(Throwable t) {
-				// TODO Auto-generated method stub
+				responseObserver.onError(t);
 				
 			}
 

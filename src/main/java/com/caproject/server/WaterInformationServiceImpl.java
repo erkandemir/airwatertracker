@@ -72,7 +72,7 @@ public class WaterInformationServiceImpl extends WaterInformationServiceImplBase
 
 			@Override
 			public void onError(Throwable t) {
-				// TODO Auto-generated method stub
+				responseObserver.onError(t);
 				
 			}
 
