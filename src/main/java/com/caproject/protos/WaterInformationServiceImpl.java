@@ -34,6 +34,11 @@ public final class WaterInformationServiceImpl {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_airWaterTrackerService_WaterPhResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_airWaterTrackerService_WaterPhInfo_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_airWaterTrackerService_WaterPhInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -49,16 +54,18 @@ public final class WaterInformationServiceImpl {
       "\030WaterInformationResponse\022\021\n\tcoliLevel\030\001" +
       " \001(\001\022\024\n\014drinkability\030\002 \001(\001\"7\n\016WaterPhReq" +
       "uest\022\022\n\nlocationId\030\001 \001(\005\022\021\n\twaterType\030\002 " +
-      "\001(\005\"8\n\017WaterPhResponse\022\017\n\007phValue\030\001 \001(\001\022" +
-      "\024\n\014drinkability\030\002 \001(\0012\375\001\n\027WaterInformati" +
-      "onService\022z\n\023GetWaterInformation\022/.airWa" +
-      "terTrackerService.WaterInformationReques" +
-      "t\0320.airWaterTrackerService.WaterInformat" +
-      "ionResponse\"\000\022f\n\017GetWaterPhValue\022&.airWa" +
-      "terTrackerService.WaterPhRequest\032\'.airWa" +
-      "terTrackerService.WaterPhResponse\"\000(\001B5\n" +
-      "\024com.caproject.protosB\033WaterInformationS" +
-      "erviceImplP\001b\006proto3"
+      "\001(\005\"E\n\017WaterPhResponse\0222\n\005items\030\001 \003(\0132#." +
+      "airWaterTrackerService.WaterPhInfo\"I\n\013Wa" +
+      "terPhInfo\022\023\n\013waterSupply\030\001 \001(\t\022\017\n\007phValu" +
+      "e\030\002 \001(\001\022\024\n\014drinkability\030\003 \001(\0012\375\001\n\027WaterI" +
+      "nformationService\022z\n\023GetWaterInformation" +
+      "\022/.airWaterTrackerService.WaterInformati" +
+      "onRequest\0320.airWaterTrackerService.Water" +
+      "InformationResponse\"\000\022f\n\017GetWaterPhValue" +
+      "\022&.airWaterTrackerService.WaterPhRequest" +
+      "\032\'.airWaterTrackerService.WaterPhRespons" +
+      "e\"\000(\001B5\n\024com.caproject.protosB\033WaterInfo" +
+      "rmationServiceImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -95,7 +102,13 @@ public final class WaterInformationServiceImpl {
     internal_static_airWaterTrackerService_WaterPhResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_airWaterTrackerService_WaterPhResponse_descriptor,
-        new java.lang.String[] { "PhValue", "Drinkability", });
+        new java.lang.String[] { "Items", });
+    internal_static_airWaterTrackerService_WaterPhInfo_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_airWaterTrackerService_WaterPhInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_airWaterTrackerService_WaterPhInfo_descriptor,
+        new java.lang.String[] { "WaterSupply", "PhValue", "Drinkability", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

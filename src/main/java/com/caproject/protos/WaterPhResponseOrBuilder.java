@@ -8,12 +8,26 @@ public interface WaterPhResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>double phValue = 1;</code>
+   * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
    */
-  double getPhValue();
-
+  java.util.List<com.caproject.protos.WaterPhInfo> 
+      getItemsList();
   /**
-   * <code>double drinkability = 2;</code>
+   * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
    */
-  double getDrinkability();
+  com.caproject.protos.WaterPhInfo getItems(int index);
+  /**
+   * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+   */
+  int getItemsCount();
+  /**
+   * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+   */
+  java.util.List<? extends com.caproject.protos.WaterPhInfoOrBuilder> 
+      getItemsOrBuilderList();
+  /**
+   * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+   */
+  com.caproject.protos.WaterPhInfoOrBuilder getItemsOrBuilder(
+      int index);
 }

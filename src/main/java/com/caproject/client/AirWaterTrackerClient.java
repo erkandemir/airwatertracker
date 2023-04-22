@@ -22,6 +22,9 @@ import com.caproject.protos.WaterInformationResponse;
 import com.caproject.protos.WaterInformationServiceGrpc;
 import com.caproject.protos.WaterInformationServiceGrpc.WaterInformationServiceBlockingStub;
 import com.caproject.protos.WaterInformationServiceGrpc.WaterInformationServiceStub;
+import com.caproject.protos.WaterPhInfo;
+import com.caproject.protos.WaterPhRequest;
+import com.caproject.protos.WaterPhResponse;
 import com.caproject.protos.AirInfoRequest;
 import com.caproject.protos.AirInfoResponse;
 import com.caproject.protos.ActivateFilterRequest;
@@ -221,7 +224,9 @@ public class AirWaterTrackerClient {
 	}
 	
 	
-	//AirInformationService Client Methods 
+	// --------------- AirInformationService Client Methods ---------------------
+
+	//GetCarbonMonoxideLevel (Bidirectional)
 	public static void GetCarbonMonoxideLevel(ArrayList<Integer> locationIds, IRpcCompleteEventListener listener) throws InterruptedException
 	{
 				
@@ -298,7 +303,9 @@ public class AirWaterTrackerClient {
 	}
 	
 	
-	//Water Information Client Methods
+	//---------------- Water Information Client Methods --------------------
+	
+	//GetWaterInformation - (Client-Side Stream)
 	public static String GetWaterInformation(int locationId, int depth)
 	{
 		WaterInformationRequest waterInfoRequest = WaterInformationRequest.newBuilder()
@@ -310,7 +317,70 @@ public class AirWaterTrackerClient {
 		responseMessage += "Coli Level: " + waterInfoResponse.getColiLevel() + "\n";
 		responseMessage += "Drinkability: " + waterInfoResponse.getDrinkability();
 		return responseMessage;
-		
 	}
+	
+	public static void GetWaterPhValue(ArrayList<Integer> locationList, int waterType, IRpcCompleteEventListener listener) throws InterruptedException
+	{
+		StreamObserver<WaterPhResponse> responseObserver = new StreamObserver<WaterPhResponse>() {
+			String responseStr = "";
+	        @Override
+	        public void onNext(WaterPhResponse reponse) {
+	        	for(WaterPhInfo phInfo : reponse.getItemsList())
+	        	{
+	        		responseStr += "Water Supply: " + phInfo.getWaterSupply() + "\n";
+	        		responseStr += "Ph Level: " + phInfo.getPhValue() + "\n";
+	        		responseStr += "Water Supply: " + phInfo.getDrinkability() + "\n";
+	        		responseStr += "---------------";
+	        	}
+	        }
+
+	        @Override
+	        public void onCompleted() {
+	        	listener.isRpcComplate(responseStr);
+	        }
+
+			@Override
+			public void onError(Throwable t) {
+				// TODO Auto-generated method stub
+				
+			}
+
+	    };
+
+		StreamObserver<WaterPhRequest> requestStreamObserver =  waterInfoServiceStub.getWaterPhValue(responseObserver);
+		
+		    try {
+		        for (int locationId : locationList) {
+		        	WaterPhRequest waterPhRequest = WaterPhRequest.newBuilder()
+		    				.setLocationId(locationId)
+		    				.setWaterType(waterType)
+		    				.build();	
+		            requestStreamObserver.onNext(waterPhRequest);
+		            Thread.sleep(1000);
+		        }
+		    } catch (RuntimeException e) {
+		    	//responseStreamObserver.onError(e);
+		        throw e;
+		    }
+		    requestStreamObserver.onCompleted();
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

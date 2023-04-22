@@ -16,8 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private WaterPhResponse() {
-    phValue_ = 0D;
-    drinkability_ = 0D;
+    items_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -44,14 +43,13 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 9: {
-
-            phValue_ = input.readDouble();
-            break;
-          }
-          case 17: {
-
-            drinkability_ = input.readDouble();
+          case 10: {
+            if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              items_ = new java.util.ArrayList<com.caproject.protos.WaterPhInfo>();
+              mutable_bitField0_ |= 0x00000001;
+            }
+            items_.add(
+                input.readMessage(com.caproject.protos.WaterPhInfo.parser(), extensionRegistry));
             break;
           }
           default: {
@@ -69,6 +67,9 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        items_ = java.util.Collections.unmodifiableList(items_);
+      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -86,22 +87,39 @@ private static final long serialVersionUID = 0L;
             com.caproject.protos.WaterPhResponse.class, com.caproject.protos.WaterPhResponse.Builder.class);
   }
 
-  public static final int PHVALUE_FIELD_NUMBER = 1;
-  private double phValue_;
+  public static final int ITEMS_FIELD_NUMBER = 1;
+  private java.util.List<com.caproject.protos.WaterPhInfo> items_;
   /**
-   * <code>double phValue = 1;</code>
+   * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
    */
-  public double getPhValue() {
-    return phValue_;
+  public java.util.List<com.caproject.protos.WaterPhInfo> getItemsList() {
+    return items_;
   }
-
-  public static final int DRINKABILITY_FIELD_NUMBER = 2;
-  private double drinkability_;
   /**
-   * <code>double drinkability = 2;</code>
+   * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
    */
-  public double getDrinkability() {
-    return drinkability_;
+  public java.util.List<? extends com.caproject.protos.WaterPhInfoOrBuilder> 
+      getItemsOrBuilderList() {
+    return items_;
+  }
+  /**
+   * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+   */
+  public int getItemsCount() {
+    return items_.size();
+  }
+  /**
+   * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+   */
+  public com.caproject.protos.WaterPhInfo getItems(int index) {
+    return items_.get(index);
+  }
+  /**
+   * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+   */
+  public com.caproject.protos.WaterPhInfoOrBuilder getItemsOrBuilder(
+      int index) {
+    return items_.get(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -118,11 +136,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (phValue_ != 0D) {
-      output.writeDouble(1, phValue_);
-    }
-    if (drinkability_ != 0D) {
-      output.writeDouble(2, drinkability_);
+    for (int i = 0; i < items_.size(); i++) {
+      output.writeMessage(1, items_.get(i));
     }
     unknownFields.writeTo(output);
   }
@@ -133,13 +148,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (phValue_ != 0D) {
+    for (int i = 0; i < items_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(1, phValue_);
-    }
-    if (drinkability_ != 0D) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(2, drinkability_);
+        .computeMessageSize(1, items_.get(i));
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -157,14 +168,8 @@ private static final long serialVersionUID = 0L;
     com.caproject.protos.WaterPhResponse other = (com.caproject.protos.WaterPhResponse) obj;
 
     boolean result = true;
-    result = result && (
-        java.lang.Double.doubleToLongBits(getPhValue())
-        == java.lang.Double.doubleToLongBits(
-            other.getPhValue()));
-    result = result && (
-        java.lang.Double.doubleToLongBits(getDrinkability())
-        == java.lang.Double.doubleToLongBits(
-            other.getDrinkability()));
+    result = result && getItemsList()
+        .equals(other.getItemsList());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -176,12 +181,10 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + PHVALUE_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        java.lang.Double.doubleToLongBits(getPhValue()));
-    hash = (37 * hash) + DRINKABILITY_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        java.lang.Double.doubleToLongBits(getDrinkability()));
+    if (getItemsCount() > 0) {
+      hash = (37 * hash) + ITEMS_FIELD_NUMBER;
+      hash = (53 * hash) + getItemsList().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -310,15 +313,18 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
+        getItemsFieldBuilder();
       }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      phValue_ = 0D;
-
-      drinkability_ = 0D;
-
+      if (itemsBuilder_ == null) {
+        items_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+      } else {
+        itemsBuilder_.clear();
+      }
       return this;
     }
 
@@ -345,8 +351,16 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.caproject.protos.WaterPhResponse buildPartial() {
       com.caproject.protos.WaterPhResponse result = new com.caproject.protos.WaterPhResponse(this);
-      result.phValue_ = phValue_;
-      result.drinkability_ = drinkability_;
+      int from_bitField0_ = bitField0_;
+      if (itemsBuilder_ == null) {
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          items_ = java.util.Collections.unmodifiableList(items_);
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.items_ = items_;
+      } else {
+        result.items_ = itemsBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -395,11 +409,31 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.caproject.protos.WaterPhResponse other) {
       if (other == com.caproject.protos.WaterPhResponse.getDefaultInstance()) return this;
-      if (other.getPhValue() != 0D) {
-        setPhValue(other.getPhValue());
-      }
-      if (other.getDrinkability() != 0D) {
-        setDrinkability(other.getDrinkability());
+      if (itemsBuilder_ == null) {
+        if (!other.items_.isEmpty()) {
+          if (items_.isEmpty()) {
+            items_ = other.items_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureItemsIsMutable();
+            items_.addAll(other.items_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.items_.isEmpty()) {
+          if (itemsBuilder_.isEmpty()) {
+            itemsBuilder_.dispose();
+            itemsBuilder_ = null;
+            items_ = other.items_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            itemsBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getItemsFieldBuilder() : null;
+          } else {
+            itemsBuilder_.addAllMessages(other.items_);
+          }
+        }
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -429,57 +463,246 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
+    private int bitField0_;
 
-    private double phValue_ ;
-    /**
-     * <code>double phValue = 1;</code>
-     */
-    public double getPhValue() {
-      return phValue_;
-    }
-    /**
-     * <code>double phValue = 1;</code>
-     */
-    public Builder setPhValue(double value) {
-      
-      phValue_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>double phValue = 1;</code>
-     */
-    public Builder clearPhValue() {
-      
-      phValue_ = 0D;
-      onChanged();
-      return this;
+    private java.util.List<com.caproject.protos.WaterPhInfo> items_ =
+      java.util.Collections.emptyList();
+    private void ensureItemsIsMutable() {
+      if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        items_ = new java.util.ArrayList<com.caproject.protos.WaterPhInfo>(items_);
+        bitField0_ |= 0x00000001;
+       }
     }
 
-    private double drinkability_ ;
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        com.caproject.protos.WaterPhInfo, com.caproject.protos.WaterPhInfo.Builder, com.caproject.protos.WaterPhInfoOrBuilder> itemsBuilder_;
+
     /**
-     * <code>double drinkability = 2;</code>
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
      */
-    public double getDrinkability() {
-      return drinkability_;
+    public java.util.List<com.caproject.protos.WaterPhInfo> getItemsList() {
+      if (itemsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(items_);
+      } else {
+        return itemsBuilder_.getMessageList();
+      }
     }
     /**
-     * <code>double drinkability = 2;</code>
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
      */
-    public Builder setDrinkability(double value) {
-      
-      drinkability_ = value;
-      onChanged();
+    public int getItemsCount() {
+      if (itemsBuilder_ == null) {
+        return items_.size();
+      } else {
+        return itemsBuilder_.getCount();
+      }
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public com.caproject.protos.WaterPhInfo getItems(int index) {
+      if (itemsBuilder_ == null) {
+        return items_.get(index);
+      } else {
+        return itemsBuilder_.getMessage(index);
+      }
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public Builder setItems(
+        int index, com.caproject.protos.WaterPhInfo value) {
+      if (itemsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureItemsIsMutable();
+        items_.set(index, value);
+        onChanged();
+      } else {
+        itemsBuilder_.setMessage(index, value);
+      }
       return this;
     }
     /**
-     * <code>double drinkability = 2;</code>
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
      */
-    public Builder clearDrinkability() {
-      
-      drinkability_ = 0D;
-      onChanged();
+    public Builder setItems(
+        int index, com.caproject.protos.WaterPhInfo.Builder builderForValue) {
+      if (itemsBuilder_ == null) {
+        ensureItemsIsMutable();
+        items_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        itemsBuilder_.setMessage(index, builderForValue.build());
+      }
       return this;
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public Builder addItems(com.caproject.protos.WaterPhInfo value) {
+      if (itemsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureItemsIsMutable();
+        items_.add(value);
+        onChanged();
+      } else {
+        itemsBuilder_.addMessage(value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public Builder addItems(
+        int index, com.caproject.protos.WaterPhInfo value) {
+      if (itemsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureItemsIsMutable();
+        items_.add(index, value);
+        onChanged();
+      } else {
+        itemsBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public Builder addItems(
+        com.caproject.protos.WaterPhInfo.Builder builderForValue) {
+      if (itemsBuilder_ == null) {
+        ensureItemsIsMutable();
+        items_.add(builderForValue.build());
+        onChanged();
+      } else {
+        itemsBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public Builder addItems(
+        int index, com.caproject.protos.WaterPhInfo.Builder builderForValue) {
+      if (itemsBuilder_ == null) {
+        ensureItemsIsMutable();
+        items_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        itemsBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public Builder addAllItems(
+        java.lang.Iterable<? extends com.caproject.protos.WaterPhInfo> values) {
+      if (itemsBuilder_ == null) {
+        ensureItemsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, items_);
+        onChanged();
+      } else {
+        itemsBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public Builder clearItems() {
+      if (itemsBuilder_ == null) {
+        items_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+      } else {
+        itemsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public Builder removeItems(int index) {
+      if (itemsBuilder_ == null) {
+        ensureItemsIsMutable();
+        items_.remove(index);
+        onChanged();
+      } else {
+        itemsBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public com.caproject.protos.WaterPhInfo.Builder getItemsBuilder(
+        int index) {
+      return getItemsFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public com.caproject.protos.WaterPhInfoOrBuilder getItemsOrBuilder(
+        int index) {
+      if (itemsBuilder_ == null) {
+        return items_.get(index);  } else {
+        return itemsBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public java.util.List<? extends com.caproject.protos.WaterPhInfoOrBuilder> 
+         getItemsOrBuilderList() {
+      if (itemsBuilder_ != null) {
+        return itemsBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(items_);
+      }
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public com.caproject.protos.WaterPhInfo.Builder addItemsBuilder() {
+      return getItemsFieldBuilder().addBuilder(
+          com.caproject.protos.WaterPhInfo.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public com.caproject.protos.WaterPhInfo.Builder addItemsBuilder(
+        int index) {
+      return getItemsFieldBuilder().addBuilder(
+          index, com.caproject.protos.WaterPhInfo.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .airWaterTrackerService.WaterPhInfo items = 1;</code>
+     */
+    public java.util.List<com.caproject.protos.WaterPhInfo.Builder> 
+         getItemsBuilderList() {
+      return getItemsFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        com.caproject.protos.WaterPhInfo, com.caproject.protos.WaterPhInfo.Builder, com.caproject.protos.WaterPhInfoOrBuilder> 
+        getItemsFieldBuilder() {
+      if (itemsBuilder_ == null) {
+        itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            com.caproject.protos.WaterPhInfo, com.caproject.protos.WaterPhInfo.Builder, com.caproject.protos.WaterPhInfoOrBuilder>(
+                items_,
+                ((bitField0_ & 0x00000001) == 0x00000001),
+                getParentForChildren(),
+                isClean());
+        items_ = null;
+      }
+      return itemsBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

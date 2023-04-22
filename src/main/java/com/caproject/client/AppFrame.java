@@ -11,31 +11,36 @@ public class AppFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 
 	public AppFrame() { 
-		 // Set the title of the frame
+		// Set main panel ------------------
         setTitle("Air Water Tracker Panel");
-        setSize(800, 800);
+        setSize(850, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel mainPanel = new JPanel(new GridLayout(5, 1));
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        
 
         //Air Information Service Row ----------------------------------
-        JPanel rowAirInformation = new JPanel(new GridLayout(1, 1));
-        JPanel airInformationPanel = new JPanel(new BorderLayout());
+        JPanel rowAirInformation = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        rowAirInformation.add(new JLabel("Air Information Service"));
+        JPanel airInformationPanel = new JPanel();
+        airInformationPanel.setLayout(new BoxLayout(airInformationPanel, BoxLayout.X_AXIS));
         
         JPanel airInformationLeftPanel = new JPanel();
-        JPanel airInformationRightPanel = new JPanel(new BorderLayout());
+        JPanel airInformationRightPanel = new JPanel();
         
         airInformationPanel.add(airInformationLeftPanel);
         airInformationPanel.add(airInformationRightPanel);
+        airInformationLeftPanel.setLayout(new BoxLayout(airInformationLeftPanel, BoxLayout.Y_AXIS));
 
         // Location Panel
-        JPanel panelLocation = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel panelLocation = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelLocation.setLayout(new BoxLayout(panelLocation, BoxLayout.X_AXIS));
      
         JRadioButton location1 = new JRadioButton("Dublin");
         JRadioButton location2 = new JRadioButton("Wiclow");
         JRadioButton location3 = new JRadioButton("Cork");
         
-        panelLocation.add(new JLabel("Locations :"));
+        panelLocation.add(new JLabel("Locations: "));
         panelLocation.add(location1);
         panelLocation.add(location2);
         panelLocation.add(location3);
@@ -43,7 +48,7 @@ public class AppFrame extends JFrame{
         airInformationLeftPanel.add(panelLocation);
         
         //Function Panel
-        JPanel airInformationFunctionPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel airInformationFunctionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton btnGetCarbonMonoxideLvl = new JButton("Show Carbon Monoxide Level");
         JButton btnActivateFilter = new JButton("Activete Filter");
         airInformationFunctionPanel.add(btnGetCarbonMonoxideLvl);
@@ -52,18 +57,16 @@ public class AppFrame extends JFrame{
         
         // TextAreaPanel
         JPanel airInformationMessagePanel = new JPanel(new BorderLayout());
-        JTextArea textArea = new JTextArea("Message:");
+        JTextArea textArea = new JTextArea(12,35);
         textArea.setBackground(Color.white);
         JScrollPane scrollPane = new JScrollPane(textArea);
         airInformationMessagePanel.add(scrollPane, BorderLayout.CENTER);
         airInformationRightPanel.add(airInformationMessagePanel);
         
+        //Add main Row
+        rowAirInformation.add(airInformationPanel);
         
-        //rowAirInformation.add(new JLabel("Air Information Service"));
-        rowAirInformation.add(airInformationLeftPanel);
-        rowAirInformation.add(airInformationRightPanel);
-       
-  
+        //Button Functions
         btnGetCarbonMonoxideLvl.addActionListener(new ActionListener(){  
         	public void actionPerformed(ActionEvent e){
                 ArrayList<Integer> locationList = new ArrayList<Integer>();
@@ -144,30 +147,54 @@ public class AppFrame extends JFrame{
         
         // Water Information Service Row -----------------------------
         
-        JPanel rowWaterInformation = new JPanel(new GridLayout(1, 1));
-        //rowWaterInformation.add(new JLabel("Water Information Service"));
-        JPanel waterInformationPanel = new JPanel(new BorderLayout());
+        JPanel rowWaterInformation = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        rowWaterInformation.add(new JLabel("Water Information Service"));
+        
+        JPanel waterInformationPanel = new JPanel();
+        waterInformationPanel.setLayout(new BoxLayout(waterInformationPanel, BoxLayout.X_AXIS));
         
         JPanel waterInformationLeftPanel = new JPanel();
-        JPanel waterInformationRightPanel = new JPanel(new BorderLayout());
+        JPanel waterInformationRightPanel = new JPanel();
         
         waterInformationPanel.add(waterInformationLeftPanel);
         waterInformationPanel.add(waterInformationRightPanel);
+        waterInformationLeftPanel.setLayout(new BoxLayout(waterInformationLeftPanel, BoxLayout.Y_AXIS));
 
         // Location Panel
-        JPanel waterPanelLocation = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panelLocation.setLayout(new BoxLayout(panelLocation, BoxLayout.X_AXIS));
+        JPanel waterPanelLocation = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        waterPanelLocation.setLayout(new BoxLayout(waterPanelLocation, BoxLayout.X_AXIS));
      
-        JRadioButton loc1 = new JRadioButton("Dublin");
-        JRadioButton loc2 = new JRadioButton("Wiclow");
-        JRadioButton loc3 = new JRadioButton("Cork");
+        JRadioButton loc1 = new JRadioButton("South");
+        JRadioButton loc2 = new JRadioButton("North");
+        JRadioButton loc3 = new JRadioButton("West");
+        JRadioButton loc4 = new JRadioButton("East");
         
-        waterPanelLocation.add(new JLabel("Locations :"));
+        waterPanelLocation.add(new JLabel("Locations: "));
         waterPanelLocation.add(loc1);
         waterPanelLocation.add(loc2);
         waterPanelLocation.add(loc3);
+        waterPanelLocation.add(loc4);
         
         waterInformationLeftPanel.add(waterPanelLocation);
+        
+        //Depth Panel
+        JPanel waterPanelDepth = new JPanel(new FlowLayout());
+        
+        JTextField depthTextInput = new JTextField(15);
+        
+        
+        waterPanelDepth.add(new JLabel("Depth Value: "));
+        waterPanelDepth.add(depthTextInput);
+        waterInformationLeftPanel.add(waterPanelDepth);
+        
+        JPanel waterPanelWaterTypePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JRadioButton type1 = new JRadioButton("Fresh Water");
+        JRadioButton type2 = new JRadioButton("Salt Water");
+        
+        waterInformationLeftPanel.add(waterPanelWaterTypePanel);
+        waterPanelWaterTypePanel.add(new JLabel("Water Type: "));
+        waterPanelWaterTypePanel.add(type1);
+        waterPanelWaterTypePanel.add(type2);
         
         //Function Panel
         JPanel 	waterInformationFunctionPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -178,37 +205,81 @@ public class AppFrame extends JFrame{
         waterInformationLeftPanel.add(waterInformationFunctionPanel);
         
         // TextAreaPanel
-        JPanel waterInformationMessagePanel = new JPanel(new BorderLayout());
-        JTextArea waterTextArea = new JTextArea("Message:");
-        textArea.setBackground(Color.white);
+        JPanel waterInformationMessagePanel = new JPanel();
+        JTextArea waterTextArea = new JTextArea(12,35);
+        waterTextArea.setBackground(Color.white);
         JScrollPane waterScrollPane = new JScrollPane(waterTextArea);
         waterInformationMessagePanel.add(waterScrollPane, BorderLayout.CENTER);
         waterInformationRightPanel.add(waterInformationMessagePanel);
         
         
-        //rowAirInformation.add(new JLabel("Air Information Service"));
-        rowWaterInformation.add(waterInformationLeftPanel);
-        rowWaterInformation.add(waterInformationRightPanel);
+        
+        rowWaterInformation.add(waterInformationPanel);
         
         
+        btnGetWaterInformation.addActionListener(new ActionListener(){  
+        	public void actionPerformed(ActionEvent e){
+                ArrayList<Integer> locationList = new ArrayList<Integer>();
+        		
+    			if(location1.isSelected()) {
+    				locationList.add(1);
+    			}
+    			if(location2.isSelected()) {
+    				locationList.add(2);
+    			}
+    			if(location3.isSelected()) { 
+    				locationList.add(3);
+    			}		
+    	         
+    			IRpcCompleteEventListener listener = new IRpcCompleteEventListener() {
+					
+					@Override
+					public void isRpcComplate(String message) {
+						textArea.setText(message);
+						
+					}
+					
+					@Override
+					public void isError() {
+						System.out.println("An error occured");
+						// TODO Auto-generated method stub
+						
+					}
+				};
+    			 
+    			try {
+					AirWaterTrackerClient.GetCarbonMonoxideLevel(locationList, listener);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+    	     
+    		}
+    	}); 
         
         
         
         
         // Radiation Information Service Row -------------------------------------
-        JPanel rowRadiationInformation = new JPanel(new GridLayout(1, 1));
-        //rowradiationInformation.add(new JLabel("radiation Information Service"));
-        JPanel radiationInformationPanel = new JPanel(new BorderLayout());
+        
+        
+        JPanel rowRadiationInformation = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        rowRadiationInformation.add(new JLabel("Radiation Information Service"));
+        
+        JPanel radiationInformationPanel = new JPanel();
+        radiationInformationPanel.setLayout(new BoxLayout(radiationInformationPanel, BoxLayout.X_AXIS));
         
         JPanel radiationInformationLeftPanel = new JPanel();
-        JPanel radiationInformationRightPanel = new JPanel(new BorderLayout());
+        JPanel radiationInformationRightPanel = new JPanel();
         
         radiationInformationPanel.add(radiationInformationLeftPanel);
         radiationInformationPanel.add(radiationInformationRightPanel);
+        radiationInformationLeftPanel.setLayout(new BoxLayout(radiationInformationLeftPanel, BoxLayout.Y_AXIS));
+        
 
         // Location Panel
-        JPanel radiationPanelLocation = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panelLocation.setLayout(new BoxLayout(panelLocation, BoxLayout.X_AXIS));
+        JPanel radiationPanelLocation = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        radiationPanelLocation.setLayout(new BoxLayout(radiationPanelLocation, BoxLayout.X_AXIS));
      
         JRadioButton loca1 = new JRadioButton("Air");
         JRadioButton loca2 = new JRadioButton("Water");
@@ -222,23 +293,23 @@ public class AppFrame extends JFrame{
         radiationInformationLeftPanel.add(radiationPanelLocation);
         
         //Function Panel
-        JPanel 	radiationInformationFunctionPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JButton btnGetRadiationInformation = new JButton("Show radiation Information");
+        JPanel 	radiationInformationFunctionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton btnGetRadiationInformation = new JButton("Show Radiation Information");
         radiationInformationFunctionPanel.add(btnGetRadiationInformation);
         radiationInformationLeftPanel.add(radiationInformationFunctionPanel);
         
         // TextAreaPanel
-        JPanel radiationInformationMessagePanel = new JPanel(new BorderLayout());
-        JTextArea radiationTextArea = new JTextArea("Message:");
+        JPanel radiationInformationMessagePanel = new JPanel();
+        JTextArea radiationTextArea = new JTextArea(12,40);
         textArea.setBackground(Color.white);
         JScrollPane radiationScrollPane = new JScrollPane(radiationTextArea);
         radiationInformationMessagePanel.add(radiationScrollPane, BorderLayout.CENTER);
         radiationInformationRightPanel.add(radiationInformationMessagePanel);
         
+        //Add to main Row
+        rowRadiationInformation.add(radiationInformationPanel);
         
-        //rowAirInformation.add(new JLabel("Air Information Service"));
-        rowRadiationInformation.add(radiationInformationLeftPanel);
-        rowRadiationInformation.add(radiationInformationRightPanel);
+        
         
         btnGetRadiationInformation.addActionListener(new ActionListener(){  
         	public void actionPerformed(ActionEvent e){
@@ -275,17 +346,17 @@ public class AppFrame extends JFrame{
     		}
     	}); 
         
-        //rowRadiationInformation.add(new JLabel("Radiation Information Service"));
         
-        
-
         // Add all in main panel
+        
         mainPanel.add(rowAirInformation);
-        mainPanel.add(new JSeparator());
         mainPanel.add(rowWaterInformation);
-        mainPanel.add(new JSeparator());
         mainPanel.add(rowRadiationInformation);
         
+        
+        rowAirInformation.setBackground(Color.ORANGE);
+        rowWaterInformation.setBackground(Color.BLUE);
+        rowRadiationInformation.setBackground(Color.LIGHT_GRAY);
         
         add(mainPanel);
 

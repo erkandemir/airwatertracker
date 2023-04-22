@@ -30,8 +30,13 @@ message WaterPhRequest {
 }
 
 message WaterPhResponse {
-  double phValue = 1;
-  double drinkability = 2;
+  repeated WaterPhInfo items = 1; 
+}
+
+message WaterPhInfo {
+  string waterSupply = 1;
+  double phValue = 2;
+  double drinkability = 3;
 }
 
 

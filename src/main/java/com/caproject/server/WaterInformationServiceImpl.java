@@ -1,9 +1,12 @@
 package com.caproject.server;
+import java.util.ArrayList;
+
 import com.caproject.protos.WaterInformationRequest;
 import com.caproject.protos.WaterInformationResponse;
 import com.caproject.protos.WaterPhRequest;
 import com.caproject.protos.WaterPhResponse;
 import com.caproject.protos.WaterInformationServiceGrpc.WaterInformationServiceImplBase;
+import com.caproject.protos.WaterPhInfo;
 
 import io.grpc.stub.StreamObserver;
 
@@ -36,9 +39,10 @@ public class WaterInformationServiceImpl extends WaterInformationServiceImplBase
 	//This method is a Client-Side stream RPC method.
 	@Override
 	public StreamObserver<WaterPhRequest> getWaterPhValue(StreamObserver<WaterPhResponse> responseObserver) {
-		// TODO Auto-generated method stub
+		
+		ArrayList<WaterPhInfo> phInfoList = new ArrayList<>();
+	      
 		return new StreamObserver<WaterPhRequest>() {
-			WaterPhResponse waterPhResponse;
 	        @Override
 	        public void onNext(WaterPhRequest request) {
 	    		int locationId = request.getLocationId();
@@ -54,13 +58,14 @@ public class WaterInformationServiceImpl extends WaterInformationServiceImplBase
 	    			drinkablity = 0;
 	    			phValue = locationId * waterType * 2;
 	    		}
-	    			
-	    			
-	    		waterPhResponse = WaterPhResponse.newBuilder()
-	        			.setDrinkability(drinkablity)
-	        			.setPhValue(phValue).build();
-	   
 	    		
+	    		WaterPhInfo phInfo = WaterPhInfo.newBuilder()
+	    				.setWaterSupply("Lake" + locationId)
+	    				.setPhValue(phValue)
+	    				.setDrinkability(drinkablity).build();
+	    		
+	    		phInfoList.add(phInfo);			
+	    			    		
 	        }
 
 			@Override
@@ -71,6 +76,7 @@ public class WaterInformationServiceImpl extends WaterInformationServiceImplBase
 
 			@Override
 			public void onCompleted() {
+				WaterPhResponse waterPhResponse = WaterPhResponse.newBuilder().addAllItems(phInfoList).build();
 				responseObserver.onNext(waterPhResponse);
 				responseObserver.onCompleted();
 			}

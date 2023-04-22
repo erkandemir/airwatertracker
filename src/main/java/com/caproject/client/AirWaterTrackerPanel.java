@@ -9,8 +9,11 @@ public class AirWaterTrackerPanel {
 	    
 		LoginFrame loginFrame = new LoginFrame();;
 	    AppFrame appFrame  = new AppFrame();
-	    
+	    loginFrame.setResizable(false);
+	    appFrame.setResizable(false);
 		loginFrame.setEventListener(
+				
+				
 	    new IloginButonEventListener() {
 			@Override
 			public void isLoginSuccess(boolean isSuccess) {
@@ -19,7 +22,6 @@ public class AirWaterTrackerPanel {
 					// Application Frame Start
 					
 					appFrame.pack();
-					appFrame.setSize(1000, 800);
 					appFrame.setLocationRelativeTo(null);
 					appFrame.setVisible(true);
 					
@@ -30,6 +32,7 @@ public class AirWaterTrackerPanel {
 				
 			}
 		});
+		
 	    loginFrame.pack();
 	    loginFrame.setLocationRelativeTo(null);
 	    loginFrame.showDialog();
