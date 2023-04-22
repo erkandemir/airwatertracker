@@ -13,16 +13,16 @@ The service communicates with clients using the gRPC protocol. Three gRPC servic
 
 Services Structure 
 1. Login Service 
-  * rpc login    - (Simple Rpc)
-  * rpc logout   - (Simple Rpc)
-  * rpc getUserInformation  - (Simple Rpc)
+   * rpc login    - (Simple Rpc)
+   * rpc logout   - (Simple Rpc)
+   * rpc getUserInformation  - (Simple Rpc)
 2. Air Information Service
-  * rpc getCarbonMonoxideLevel - (Bidirectional Stream)
-  * rpc activateFilter -  (Server-Side Stream)
+   * rpc getCarbonMonoxideLevel - (Bidirectional Stream)
+   * rpc activateFilter -  (Server-Side Stream)
 3. Water Information Service
-  * rpc getWaterInformation - (Simple Rpc)
-  * rpc getWaterPhValue  - (Client-Side Stream)
+   * rpc getWaterInformation - (Simple Rpc)
+   * rpc getWaterPhValue  - (Client-Side Stream)
 4. Radiation Information Service
-  * rpc getRadiationLevel - (Server-Side Stream)
+   * rpc getRadiationLevel - (Server-Side Stream)
 
 
