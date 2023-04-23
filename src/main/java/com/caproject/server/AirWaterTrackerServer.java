@@ -29,7 +29,7 @@ public class AirWaterTrackerServer {
 			//Register Server 
 			registerJmDns(prop);
 			
-			int port = Integer.valueOf( prop.getProperty("service_port") );
+			int port = Integer.valueOf(prop.getProperty("service_port") );
 
 			Server server = ServerBuilder.forPort(port)
 					.addService(loginService)

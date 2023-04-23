@@ -214,7 +214,7 @@ public class AppFrame extends JFrame{
         
         //Function Panel
         JPanel 	waterInformationFunctionPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JButton btnGetWaterPhValue = new JButton("Show Water Ph Filter");
+        JButton btnGetWaterPhValue = new JButton("Show Water Ph Value");
         waterInformationFunctionPanel.add(btnGetWaterPhValue);
         waterInformationLeftPanel.add(waterInformationFunctionPanel);
         
